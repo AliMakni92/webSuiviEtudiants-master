@@ -1,0 +1,87 @@
+{% extends 'SariAppBundle::Admin/layout.html.twig' %}
+
+{% block title %} Stage {{ stage.entreprise.raisonSociale}} {{ stage.sujet }}{% endblock %}
+
+{% block contentheader %}
+    <h1>
+        Stage
+        <small>fiche informations</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ path('admin_homepage') }}"><i class="fa fa-dashboard"></i> Accueil</a></li>
+        <li><a href="{{ path('admin_stage_index') }}"><i class="fa fa-university"></i> Stage</a></li>
+        <li class="active">stage {{ stage.entreprise.raisonSociale}} | {{ stage.sujet }}</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+
+    <!-- Default box -->
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Informations</h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Réduire">
+                            <i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+
+                    <p>id : {{ stage.id }}</p>
+                    <p>Etudiant : {{ stage.etudiant.personne.nom }} {{ stage.etudiant.personne.prenom }}</p>
+                    <p>Enseignant : {{ stage.enseignant.personne.nom }} {{ stage.enseignant.personne.prenom }}</p>
+                    <p>Professionnel : {{ stage.professionnel.personne.nom }} {{ stage.professionnel.personne.prenom }}</p>
+                    <p>Date du stage : {{ stage.dateDebut|date("d/m/Y") }} - {{stage.dateFin|date("d/m/Y")}}</p></p>
+                    <p>Sujet : {{ stage.sujet }}</p>
+                    <p>Projet : {{ stage.projet }}</p>
+                    <p>Description : {{ stage.description }}</p>
+                    <p>Note rapport : {{ stage.noteRapport }}</p>
+                    <p>Note soutenance : {{ stage.noteSoutenance }}</p>
+                    <p>Note projet : {{ stage.noteProjet }}</p>
+                    <p>Note travail : {{ stage.noteTravail }}</p>
+                    <p>Adresse : {{ stage.entreprise.adresse.adr }}</p>
+                    <p>Adresse complémentaire : {{ stage.entreprise.adresse.complement }}</p>
+                    <p>Code postal : {{ stage.entreprise.adresse.codePostal }}</p>
+                    <p>Ville : {{ stage.entreprise.adresse.ville }}</p>
+                    <p>Téléphone fixe : {{ stage.entreprise.adresse.telFixe }}</p>
+                    <p>Téléphone portable : {{ stage.entreprise.adresse.telPort }}</p>
+
+                    <div class="form-group">
+                        <a class="btn btn-lg btn-success"
+                           href="{{ path('admin_stage_edit', { 'id': stage.id }) }}"><i
+                                    class="fa fa-pencil"></i> Edit</a>
+                    </div>
+
+                    {{ form_start(delete_form) }}
+                    <div class="form-group">
+                        <button onclick="return confirm('Êtes-vous sûr de vouloir supprimer le stage ?');"
+                                type="submit"
+                                class="btn btn-lg btn-danger" data-toggle="tooltip"
+                                title="Supprimer la stage">
+                            <i class="fa fa-trash"></i> Supprimer
+                        </button>
+                    </div>
+                    {{ form_end(delete_form) }}
+
+                </div><!-- /.box-body -->
+                <div class="box-footer">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            {#<p>Ajouté le {{ stage.createdAt|date("d/m/Y G:i") }}
+                                {% if date(stage.updatedAt) > date(stage.createdAt) %}
+                                    et mis à jour {{ stage.updatedAt|ago }}
+                                {% endif %}
+                            </p>#}
+                        </div>
+                    </div>
+                </div><!-- /.box-footer-->
+            </div><!-- /.box -->
+        </div>
+
+
+    </div>
+{% endblock %}

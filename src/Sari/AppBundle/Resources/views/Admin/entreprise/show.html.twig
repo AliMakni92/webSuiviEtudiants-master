@@ -1,0 +1,234 @@
+{% extends 'SariAppBundle::Admin/layout.html.twig' %}
+
+{% block title %} Enteprise {{ entreprise.raisonSociale }}{% endblock %}
+
+{% block contentheader %}
+    <h1>
+        Enteprise
+        <small>fiche information</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ path('admin_homepage') }}"><i class="fa fa-dashboard"></i> Accueil</a></li>
+        <li><a href="{{ path('admin_entreprise_index') }}"><i class="fa fa-building"></i> Entreprise</a></li>
+        <li class="active">Entreprise {{ entreprise.raisonSociale }}</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+
+    <!-- Default box -->
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Informations</h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Réduire">
+                            <i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <table>
+                        <tbody>
+                        <tr>
+                            <th>Id :</th>
+                            <td>{{ entreprise.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Raison sociale :</th>
+                            <td>{{ entreprise.raisonSociale }}</td>
+                        </tr>
+                        <tr>
+                            <th>Secteur d'activité :</th>
+                            <td>{{ entreprise.secteurActivite }}</td>
+                        </tr>
+                        <tr>
+                            <th>Type entreprise :</th>
+                            <td>{{ entreprise.typeEntreprise }}</td>
+                        </tr>
+                        <tr>
+                            <th>Effectif :</th>
+                            <td>{{ entreprise.effectif }}</td>
+                        </tr>
+                        <tr>
+                            <th>Statut juridique :</th>
+                            <td>{{ entreprise.statutJuridique }}</td>
+                        </tr>
+                        <tr>
+                            <th>Code NAF :</th>
+                            <td>{{ entreprise.codeNAF }}</td>
+                        </tr>
+                        <tr>
+                            <th>Siret :</th>
+                            <td>{{ entreprise.siret }}</td>
+                        </tr>
+                        <tr>
+                            <th>Site internet :</th>
+                            <td>{{ entreprise.urlWeb }}</td>
+                        </tr>
+                        <tr>
+                            <th>Adresse :</th>
+                            <td>{{ entreprise.adresse.adr }}</td>
+                        </tr>
+                        <tr>
+                            <th>Complement Adresse :</th>
+                            <td>{{ entreprise.adresse.complement }}</td>
+                        </tr>
+                        <tr>
+                            <th>Code postale :</th>
+                            <td>{{ entreprise.adresse.codepostal }}</td>
+                        </tr>
+                        <tr>
+                            <th>Ville :</th>
+                            <td>{{ entreprise.adresse.ville }}</td>
+                        </tr>
+                        <tr>
+                            <th>Pays :</th>
+                            <td>{{ entreprise.adresse.pays }}</td>
+                        </tr>
+                        <tr>
+                            <th>Téléphone fixe :</th>
+                            <td>{{ entreprise.adresse.telfixe }}</td>
+                        </tr>
+                        <tr>
+                            <th>Téléphone portable :</th>
+                            <td>{{ entreprise.adresse.telport }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="form-group">
+                        <a class="btn btn-lg btn-success"
+                           href="{{ path('admin_entreprise_edit', { 'id': entreprise.id }) }}"><i
+                                    class="fa fa-pencil"></i> Edit</a>
+
+                        <a target="_blank"
+                           href="https://www.google.fr/maps/place/{{ entreprise.adresse.adr }} {{ entreprise.adresse.codePostal }} {{ entreprise.adresse.ville }} {{ entreprise.adresse.pays }}"
+                           class="btn btn-lg btn-info">
+                            <i class="fa fa-map"></i> Google Map
+                        </a>
+                    </div>
+
+                    {{ form_start(delete_form) }}
+                    <div class="form-group">
+                        <button onclick="return confirm('Êtes-vous sûr de vouloir supprimer l\'entreprise ?');"
+                                type="submit"
+                                class="btn btn-lg btn-danger" data-toggle="tooltip"
+                                title="Supprimer la personne">
+                            <i class="fa fa-trash"></i> Supprimer
+                        </button>
+                    </div>
+                    {{ form_end(delete_form) }}
+
+                </div><!-- /.box-body -->
+                <div class="box-footer">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p>Ajouté le {{ entreprise.createdAt|date("d/m/Y G:i") }}
+                                {% if date(entreprise.updatedAt) > date(entreprise.createdAt) %}
+                                    et mis à jour {{ entreprise.updatedAt|ago }}
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div><!-- /.box-footer-->
+            </div><!-- /.box -->
+        </div>
+
+        <div class="col-md-12">
+
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Employés</h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Réduire">
+                            <i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>personne</th>
+                            <th>poste</th>
+                            <th>service</th>
+                        </tr>
+                        </thead>
+                        {% for professionnel in entreprise.professionnels %}
+                            <tbody>
+                            <tr>
+                                <td>{{ professionnel.id }}</td>
+                                <td>
+                                    <a href="{{ path('admin_personne_show', {'id' : professionnel.personne.id}) }}">{{ professionnel.personne.prenom }} {{ professionnel.personne.nom }}</a>
+                                </td>
+                                <td>{{ professionnel.poste }}</td>
+                                <td>{{ professionnel.service }}</td>
+                            </tr>
+                            </tbody>
+                        {% endfor %}
+                    </table>
+                </div><!-- /.box-body -->
+                <div class="box-footer">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p>
+                                {{ entreprise.professionnels|length }} employés
+                            </p>
+                        </div>
+                    </div>
+                </div><!-- /.box-footer-->
+            </div><!-- /.box -->
+        </div>
+
+        <div class="col-md-12">
+
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Stages</h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Réduire">
+                            <i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>Date début et fin</th>
+                            <th>Sujet</th>
+                            <th>Etudiant</th>
+                            <th>Enseignant</th>
+                            <th>Professionnel</th>
+                        </tr>
+                        </thead>
+                        {% for stage in entreprise.stages %}
+                            <tbody>
+                            <tr>
+                                <td>{{ stage.id }}</td>
+                                <td>{{ stage.dateDebut|date('Y/m/d') }} - {{ stage.dateFin|date('Y/m/d') }}</td>
+                                <td>{{ stage.sujet }}</td>
+                                <td>{{ stage.etudiant.personne.prenom }} {{ stage.etudiant.personne.nom }}</td>
+                                <td>{{ stage.enseignant.personne.prenom }} {{ stage.enseignant.personne.nom }}</td>
+                                <td>{{ stage.professionnel.personne.prenom }} {{ stage.professionnel.personne.nom }}</td>
+                            </tr>
+                            </tbody>
+                        {% endfor %}
+                    </table>
+                </div><!-- /.box-body -->
+                <div class="box-footer">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p>
+                                {{ entreprise.stages|length }} stages
+                            </p>
+                        </div>
+                    </div>
+                </div><!-- /.box-footer-->
+            </div><!-- /.box -->
+        </div>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,16 @@
+Sari\UserBundle\Entity\Utilisateur:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: username
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: email
+    properties:
+        username:
+            - NotBlank: ~
+            - Length:
+                min: 3
+        email:
+            - NotBlank: ~
+            - Email:
+                checkMX: true
+        plainPassword:
+            - Length:
+                min: 5

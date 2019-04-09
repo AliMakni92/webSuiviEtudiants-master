@@ -1,0 +1,33 @@
+{#
+    This template is used to render errors of type HTTP 403 (Forbidden)
+
+    This is the simplest way to customize error pages in Symfony applications.
+    In case you need it, you can also hook into the internal exception handling
+    made by Symfony. This allows you to perform advanced tasks and even recover
+    your application from some errors.
+    See http://symfony.com/doc/current/cookbook/controller/error_pages.html
+#}
+
+{% extends 'SariAppBundle::Front/layout.html.twig' %}
+
+{% block title %} Erreur 403 - Suivi des étudiants{% endblock %}
+
+{% block body %}
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    <i class="fa fa-unlock-alt"></i> Erreur 403
+                </h1>
+                <p class="lead">
+                    Vous n'êtes pas autorisé à accéder à cette ressource.
+                </p>
+                <p>
+                    Demandez à votre gestionnaire ou administrateur système afin de vous accorder
+                    l'accès à cette ressource.
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'SariAppBundle::Admin/layout.html.twig' %}
+
+{% block title %} Corbeille professionnel {% endblock %}
+
+{% block contentheader %}
+    <h1>
+        professionnel
+        <small>corbeille</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ path('admin_homepage') }}"><i class="fa fa-dashboard"></i> Accueil</a></li>
+        <li><a href="{{ path('admin_professionnel_index') }}"><i class="fa fa-building"></i> professionnel</a></li>
+        <li class="active"><i class="fa fa-trash"></i> professionnel</li>
+    </ol>
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">
+                        Liste des <span class="badge bg-blue">{{ professionnels.getTotalItemCount }}</span> professionnels
+                    </h3>
+                    <div class="box-tools pull-right">
+                        <a href="{{ path('admin_professionnel_new') }}" class="btn btn-box-tool" data-toggle="tooltip"
+                           title="Ajouter professionnel">
+                            <i class="fa fa-plus"></i></a>
+                    </div>
+                </div><!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+
+                            <th>{{ knp_pagination_sortable(professionnels, 'Id', 'p.id') }}</th>
+                            <th>{{ knp_pagination_sortable(professionnels, 'Date de Suppréssion', 'p.deletedAt') }}</th>
+                            <th>{{ knp_pagination_sortable(professionnels, 'Supprimer à', 'p.deletedAt') }}</th>
+                            <th>Entreprise</th>
+                            <th>poste</th>
+                            <th>service</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        {% for professionnel in professionnels %}
+                            <tbody>
+                            <tr>
+                                <td>{{ professionnel.id }}</td>
+                                <td>{{ professionnel.deletedAt|date("d/m/Y G:i") }}</td>
+                                <td>{{ professionnel.deletedAt|ago }}</td>
+                                <td>{{ professionnel.entreprise.id }}</td>
+                                <td>{{ professionnel.poste }}</td>
+                                <td>{{ professionnel.service }}</td>
+                                <td>
+                                    <a class="btn btn-xs btn-warning"
+                                       href="{{ path('admin_professionnel_restore', { 'id': professionnel.id }) }}">
+                                        <i class="fa fa-undo"></i> Restaurer</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        {% endfor %}
+                    </table>
+                </div><!-- /.box-body -->
+                <div class="box-footer">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            {{ knp_pagination_render(professionnels) }}
+                        </div>
+                        <div class="col-lg-6">
+                            <a href="{{ path('admin_professionnel_index') }}" class="btn btn-primary pull-right"><i
+                                        class="fa fa-users"></i> Retour à la liste des professionnels</a>
+                        </div>
+                    </div>
+                </div><!-- /.box-footer-->
+            </div><!-- /.box -->
+        </div>
+    </div>
+
+{% endblock %}

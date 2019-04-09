@@ -1,0 +1,24 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="page-header">
+            <h1>{{ 'layout.register'|trans({}, 'FOSUserBundle') }}
+                <small>étudiant, enseignant, professionnel</small>
+            </h1>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-offset-3 col-md-6">
+        {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+        {{ form_widget(form) }}
+        <div>
+            <button class="btn btn-info" type="submit">{{ 'registration.submit'|trans }}</button>
+        </div>
+        {{ form_end(form) }}
+    </div>
+</div>
+

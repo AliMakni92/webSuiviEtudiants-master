@@ -1,0 +1,208 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>year</source>
+                <target>Année</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>month</source>
+                <target>Mois</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>day</source>
+                <target>Jour</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>Adr personnel</source>
+                <target>Adresse Personnelle :</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>male</source>
+                <target>Homme</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>female</source>
+                <target>Femme</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>Next</source>
+                <target>Suivant</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>Previous</source>
+                <target>Précèdent</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>Nom</source>
+                <target>Nom</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>Prenom</source>
+                <target>Prénom</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>Sexe</source>
+                <target>Sexe</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>Date naissance</source>
+                <target>Date de naissance</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>Photo file</source>
+                <target>Photos</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>File</source>
+                <target>Fichier</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>Supprimer ?</source>
+                <target>Supprimer ?</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>Code postal</source>
+                <target>Code postal</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>Ville</source>
+                <target>Ville</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>Pays</source>
+                <target>Pays</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>Tel fixe</source>
+                <target>Télephone fixe</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>Tel port</source>
+                <target>Télephone portable</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>Adr</source>
+                <target>Adresse</target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>Complement</source>
+                <target>Complement d'adresse</target>
+            </trans-unit>
+            <trans-unit id="23">
+                <source>Personne</source>
+                <target>Personne :</target>
+            </trans-unit>
+            <trans-unit id="24">
+                <source>Type entreprise</source>
+                <target>Type entreprise</target>
+            </trans-unit>
+            <trans-unit id="25">
+                <source>Raison sociale</source>
+                <target>Raison sociale</target>
+            </trans-unit>
+            <trans-unit id="26">
+                <source>Secteur activite</source>
+                <target>Secteur d'activité</target>
+            </trans-unit>
+            <trans-unit id="27">
+                <source>Effectif</source>
+                <target>Effectif</target>
+            </trans-unit>
+            <trans-unit id="28">
+                <source>Statut juridique</source>
+                <target>Statut juridique</target>
+            </trans-unit>
+            <trans-unit id="29">
+                <source>Code n a f</source>
+                <target>Code NAF :</target>
+            </trans-unit>
+            <trans-unit id="30">
+                <source>Siret</source>
+                <target>Siret</target>
+            </trans-unit>
+            <trans-unit id="31">
+                <source>Url web</source>
+                <target>URL Web</target>
+            </trans-unit>
+            <trans-unit id="32">
+                <source>adr_entreprise</source>
+                <target>Adresse de l'entreprise</target>
+            </trans-unit>
+            <trans-unit id="33">
+                <source>Type eta</source>
+                <target>Type d'établissement</target>
+            </trans-unit>
+            <trans-unit id="34">
+                <source>Description</source>
+                <target>Description</target>
+            </trans-unit>
+            <trans-unit id="35">
+                <source>Personnel</source>
+                <target>Adresse</target>
+            </trans-unit>
+            <trans-unit id="36">
+                <source>Formations</source>
+                <target>Formations</target>
+            </trans-unit>
+            <trans-unit id="37">
+                <source>Etudiants</source>
+                <target>Etudiants</target>
+            </trans-unit>
+            <trans-unit id="38">
+                <source>Enseignants</source>
+                <target>Enseignants</target>
+            </trans-unit>
+            <trans-unit id="39">
+                <source>Poste</source>
+                <target>Poste</target>
+            </trans-unit>
+            <trans-unit id="40">
+                <source>Service</source>
+                <target>Service</target>
+            </trans-unit>
+            <trans-unit id="41">
+                <source>Entreprise</source>
+                <target>Entreprise</target>
+            </trans-unit>
+            <trans-unit id="42">
+                <source>adr_pro</source>
+                <target>Adresse professionnelle</target>
+            </trans-unit>
+            <trans-unit id="43">
+                <source>Username</source>
+                <target>Nom d'utilisateur</target>
+            </trans-unit>
+            <trans-unit id="44">
+                <source>Email</source>
+                <target>Adresse Email</target>
+            </trans-unit>
+            <trans-unit id="45">
+                <source>Roles</source>
+                <target>Rôles</target>
+            </trans-unit>
+            <trans-unit id="46">
+                <source>ROLE_SUPER_ADMIN</source>
+                <target>Super Administrateur</target>
+            </trans-unit>
+            <trans-unit id="47">
+                <source>ROLE_ADMIN</source>
+                <target>Administrateur</target>
+            </trans-unit>
+            <trans-unit id="48">
+                <source>ROLE_USER</source>
+                <target>Utilisateur</target>
+            </trans-unit>
+            <trans-unit id="49">
+                <source>Enabled</source>
+                <target>Activé</target>
+            </trans-unit>
+            <trans-unit id="50">
+                <source>Locked</source>
+                <target>Bloqué</target>
+            </trans-unit>
+
+        </body>
+    </file>
+</xliff>

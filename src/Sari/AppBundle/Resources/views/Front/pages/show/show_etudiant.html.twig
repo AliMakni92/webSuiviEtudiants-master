@@ -1,0 +1,71 @@
+{% extends 'SariAppBundle::Front/layout.html.twig' %}
+
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="page-header">
+                <h1>Information étudiant
+                    <small>IUT de Lens</small>
+                </h1>
+            </div>
+            <div class="col-md-12">
+                <h3>Etudiant :</h3>
+
+                <p><strong>Personne :</strong> {{ etudiant.personne.prenom }} {{ etudiant.personne.nom }}</p>
+
+                {% if etudiant is not null %}
+
+                    <p><strong>Etablissement :</strong> {{ etudiant.etablissement.nom }}</p>
+                    <p><strong>Numéro INE :</strong> {{ etudiant.numIne }}</p>
+                    <p><strong>Numéro étudiant :</strong> {{ etudiant.numEtudiant }}</p>
+
+                    <h3>Inscription :</h3>
+
+                    <ul>
+                        {% for inscription in etudiant.inscriptions %}
+                            <li><strong>Année :</strong> {{ inscription.anneeInscription }}
+                                <ul>
+                                    <li><strong>Libellé :</strong> {{ inscription.formation.libelle }}</li>
+                                    <li><strong>Résultat :</strong> {{ inscription.resultat }}</li>
+                                </ul>
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                    <h3>Stage :</h3>
+
+                    <ul>
+                        {% for stage in etudiant.stages %}
+                            <li><strong>Sujet :</strong> {{ stage.sujet }}
+                                <ul>
+                                    <li>
+                                        <strong>date :</strong> {{ stage.dateDebut|date('d/m/Y') }}
+                                        de {{ stage.dateFin|date('d/m/Y') }}
+                                    </li>
+                                </ul>
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+
+                    <div class="form-group">
+                        <a class="btn btn-lg btn-success"
+                           href="{{ path('sari_edit_etudiant', { 'id': etudiant.id }) }}"><i
+                                    class="fa fa-pencil"></i> Edit</a>
+                    </div>
+
+                {% else %}
+
+                    <a class="btn btn-primary" href="{{ path('sari_create_etudiant') }}">
+                        remplir mes informations étudiant
+                    </a>
+                {% endif %}
+
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

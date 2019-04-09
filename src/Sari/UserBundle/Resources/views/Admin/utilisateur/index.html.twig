@@ -1,0 +1,135 @@
+{% extends 'SariAppBundle::Admin/layout.html.twig' %}
+
+{% block title %} Utilisateur index{% endblock %}
+
+{% block contentheader %}
+    <h1>
+        Utilisateur
+        <small>index</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ path('admin_homepage') }}"><i class="fa fa-dashboard"></i> Accueil</a></li>
+        <li class="active"><i class="fa fa-users"></i> Utilisateur</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">
+                        Liste des <span class="badge bg-blue">{{ utilisateurs.getTotalItemCount }}</span> utilisateurs
+                    </h3>
+                    <div class="box-tools pull-right">
+                        <a href="{{ path('admin_utilisateur_deleted') }}" class="btn btn-box-tool" data-toggle="tooltip"
+                           title="Voir la corbeille">
+                            <i class="fa fa-trash-o"></i></a>
+                    </div>
+                    <div>
+                        <form class="form-inline pull-right" id="form_recherche"
+                              action="{{ path('admin_utilisateur_search') }}" method="GET">
+                            <div class="form-group">
+                                <label for="perpage">Ligne par page:</label>
+                                <select id="perpage" name="nbperpage" class="form-control">
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option selected="selected" value="20">20</option>
+                                    <option value="30">30</option>
+                                    <option value="40">40</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                    <option value="200">200</option>
+                                    <option value="300">300</option>
+                                    <option value="400">400</option>
+                                    <option value="500">500</option>
+                                    <option value="1000">1000</option>
+                                </select>
+                            </div> <!-- form group [rows] -->
+
+                            <div class="form-group">
+                                <label class="sr-only" for="search">Recherche</label>
+                                <div class="input-group">
+                                    <input id="search" name="search" type="text" class="form-control"
+                                           placeholder="Recherche par Identifiant">
+
+                                    <div class="input-group-btn">
+                                        <button type="submit" class="btn btn-default" data-toggle="tooltip"
+                                                title="Rechercher"><i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div><!-- form group [search] -->
+                        </form>
+                    </div>
+                </div><!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>{{ knp_pagination_sortable(utilisateurs, 'Id', 'u.id') }}</th>
+                            <th>{{ knp_pagination_sortable(utilisateurs, 'Identifiant', 'u.username') }}</th>
+                            <th>{{ knp_pagination_sortable(utilisateurs, 'Email', 'u.email') }}</th>
+                            <th>{{ knp_pagination_sortable(utilisateurs, 'Dernière connexion', 'u.lastLogin') }}</th>
+                            <th>Personne</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        {% for utilisateur in utilisateurs %}
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <a href="{{ path('admin_utilisateur_show', { 'id': utilisateur.id }) }}">{{ utilisateur.id }}</a>
+                                </td>
+                                <td>{{ utilisateur.username }}</td>
+                                <td>
+                                    <a href="mailto:{{ utilisateur.email }}" data-toggle="tooltip" data-placement="top"
+                                       title="Envoyer un email">{{ utilisateur.email }} <i class="fa fa-envelope-o"></i></a></td>
+                                <td>{% if utilisateur.lastLogin is null %}-{% else %}{{ utilisateur.lastLogin|date("d/m/Y") }}{% endif %}</td>
+                                <td>{% if utilisateur.personne is null %}
+                                        -
+                                    {% else %}
+                                        <a href="{{ path('admin_personne_show', {'id' : utilisateur.personne.id}) }}">{{ utilisateur.personne.prenom }} {{ utilisateur.personne.nom }}</a>
+                                    {% endif %}</td>
+                                <td>
+                                    <a href="{{ path('admin_utilisateur_show', { 'id': utilisateur.id }) }}"
+                                       class="btn btn-xs btn-primary" data-toggle="tooltip" data-placement="left"
+                                       title="Voir {{ utilisateur.username }}">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                    <a href="{{ path('admin_utilisateur_edit', { 'id': utilisateur.id }) }}"
+                                       class="btn btn-xs btn-success" data-toggle="tooltip" data-placement="left"
+                                       title="Modifier {{ utilisateur.username }}">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        {% endfor %}
+                    </table>
+                </div><!-- /.box-body -->
+                <div class="box-footer">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            {{ knp_pagination_render(utilisateurs) }}
+                        </div>
+                        <div class="col-lg-6">
+                            <a href="{{ path('admin_personne_new') }}" class="btn btn-primary pull-right"><i
+                                        class="fa fa-user-plus"></i> Ajouter une nouvelle personne</a>
+                        </div>
+                    </div>
+                </div><!-- /.box-footer-->
+            </div><!-- /.box -->
+        </div>
+    </div>
+
+{% endblock %}

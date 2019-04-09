@@ -1,0 +1,43 @@
+{% extends 'SariAppBundle::Admin/layout.html.twig' %}
+
+{% block title %} Stage {{ stage.entreprise.raisonSociale}} {{ stage.sujet }} Administration {% endblock %}
+
+{% block contentheader %}
+    <h1>
+        Stage
+        <small>edition</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ path('admin_homepage') }}"><i class="fa fa-dashboard"></i> Accueil</a></li>
+        <li><a href="{{ path('admin_stage_index') }}"><i class="fa fa-university"></i> Stage</a></li>
+        <li><a href="{{ path('admin_stage_show', {'id' : stage.id}) }}"><i
+                        class="fa fa-university"></i> {{ stage.entreprise.raisonSociale}} | {{ stage.sujet }}</a></li>
+        <li class="active"><i class="fa fa-pencil"></i> Modification</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+    <!-- Default box -->
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Formulaire d'edition</h3>
+        </div>
+        <div class="box-body">
+            {{ form_start(edit_form) }}
+            {{ form_widget(edit_form) }}
+            {{ form_end(edit_form) }}
+
+        </div><!-- /.box-body -->
+        <div class="box-footer">
+            <div class="row">
+                <div class="col-lg-12">
+                    {#<p>Ajouté le {{ stage.createdAt|date("d/m/Y G:i") }}
+                        {% if date(stage.updatedAt) > date(stage.createdAt) %}
+                            et mis à jour {{ stage.updatedAt|ago }}
+                        {% endif %}
+                    </p>#}
+                </div>
+            </div>
+        </div><!-- /.box-footer-->
+    </div><!-- /.box -->
+{% endblock %}

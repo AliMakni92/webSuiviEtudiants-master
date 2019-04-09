@@ -1,0 +1,10 @@
+services:
+#    sari_user.example:
+#        class: Sari\UserBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]
+
+# FIX issues : https://github.com/FriendsOfSymfony/FOSUserBundle/issues/2048
+# FIXED WITH 2.8.3 and 3.0.2 ? si ça rebug uncomment next lines - alexandre pavy
+#services:
+#    fos_user.doctrine_registry:
+#        alias: doctrine

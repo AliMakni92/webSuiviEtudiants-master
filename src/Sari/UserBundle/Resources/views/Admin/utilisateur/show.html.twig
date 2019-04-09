@@ -1,0 +1,105 @@
+{% extends 'SariAppBundle::Admin/layout.html.twig' %}
+
+{% block title %} Utilisateur {{ utilisateur.username }} {{ utilisateur.email }}{% endblock %}
+
+{% block contentheader %}
+    <h1>
+        Utilisateur
+        <small>information</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ path('admin_homepage') }}"><i class="fa fa-dashboard"></i> Accueil</a></li>
+        <li><a href="{{ path('admin_utilisateur_index') }}"><i class="fa fa-users"></i> Utilisateur</a></li>
+        <li class="active">{{ utilisateur.username }}</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+
+    <!-- Default box -->
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><i class="fa fa-user"></i> Utilisateur {{ utilisateur.username }}</h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                title="Réduire">
+                            <i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <p><strong>Id : </strong>{{ utilisateur.id }}</p>
+                    <p><strong>Identifiant : </strong> {{ utilisateur.username }}</p>
+                    <p><strong>Email : </strong> <a href="mailto:{{ utilisateur.email }}" data-toggle="tooltip"
+                                                    data-placement="top" title="Envoyer un email">
+                            {{ utilisateur.email }} <i class="fa fa-envelope-o"></i></a></p>
+                    <p><strong>Rôles : </strong> {% for role in utilisateur.roles %}{{ role }} {% endfor %}</p>
+                    {% if utilisateur.lastLogin %}
+                        <p><strong>Dernière connexion : </strong> {{ utilisateur.lastLogin|date("d/m/Y G:i") }}</p>
+
+                    {% endif %}
+                    <p>
+                        <strong>Compte activé : </strong>
+                        {% if utilisateur.enabled < 1 %} Non {% else %} Oui {% endif %}
+                    </p>
+                    <p>
+                        <strong>Compte bloqué : </strong>
+                        {% if utilisateur.locked < 1 %} Non {% else %} Oui {% endif %}
+                    </p>
+
+                    <div class="form-group">
+                        <a class="btn btn-success"
+                           href="{{ path('admin_utilisateur_edit', { 'id': utilisateur.id }) }}">
+                            <i class="fa fa-pencil"></i> Editer</a>
+                    </div>
+
+                    {{ form_start(delete_form) }}
+                    <div class="form-group">
+                        <button onclick="return confirm('Êtes-vous sûr de vouloir supprimer l\'utilisateur ?');"
+                                type="submit" class="btn btn-danger" data-toggle="tooltip"
+                                title="Supprimer la personne"><i class="fa fa-trash"></i> Supprimer
+                        </button>
+                    </div>
+                    {{ form_end(delete_form) }}
+
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+        </div>
+
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><i class="fa fa-male"></i> Informations de la Personne </h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Réduire">
+                            <i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+
+                    {% if utilisateur.personne is null %}
+                        <p>Cette personne n'as pas encore remplit ses informations.</p>
+                        <p>Vous pouvez <a href="{{ path('admin_personne_new') }}" class="btn btn-xs btn-info">
+                                ajouter une nouvelle personne</a> et
+                            <a href="{{ path('admin_utilisateur_edit', { 'id': utilisateur.id }) }}"
+                               class="btn btn-xs btn-info">modifier l'utilisateur
+                            </a> afin de relier ses informations
+                        </p>
+                    {% else %}
+                        <p><strong>Prénom et Nom : </strong>
+                            <a href="{{ path('admin_personne_show', {'id' : utilisateur.personne.id}) }}"
+                               data-toggle="tooltip" data-placement="top"
+                               title="Voir le profile de {{ utilisateur.personne.prenom }} {{ utilisateur.personne.nom }}">
+                                {{ utilisateur.personne.prenom }} {{ utilisateur.personne.nom }}
+                            </a>
+                        </p>
+                    {% endif %}
+
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+        </div>
+    </div>
+{% endblock %}
+

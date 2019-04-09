@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!-- Copyright © 2015-2016 Tous droits réservés à IUT de Lens - http://www.iut-lens.univ-artois.fr/ -->
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="Administration suivi des étudiants">
+    <meta name="author" content="Alexandre PAVY, Alexandre SZYMKIW, Arnaud MORGAN">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    <title>{% block title %}Administration - IUT de Lens{% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ asset('bundles/sariapp/lib/bootstrap-3.3.6/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/sariapp/lib/font-awesome-4.5.0/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="{{ asset('bundles/sariapp/lib/AdminLTE-2.3.0/css/AdminLTE.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/sariapp/lib/AdminLTE-2.3.0/css/skins/_all-skins.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/sariapp/css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/sariapp/css/admin.css') }}">
+
+    {% block style %}{% endblock %}
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<!-- ADD THE CLASS fixed TO GET A FIXED HEADER AND SIDEBAR LAYOUT -->
+<!-- the fixed layout is not compatible with sidebar-mini -->
+<body style="-ms-overflow-style: scrollbar;" class="hold-transition skin-blue fixed sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
+
+    <!-- =============================================== -->
+    {% include 'SariAppBundle:Admin/partials:header.html.twig' %}
+    <!-- =============================================== -->
+
+    <!-- =============================================== -->
+    {% include 'SariAppBundle:Admin/partials:sidebar.html.twig' %}
+    <!-- =============================================== -->
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            {% block contentheader %} {% endblock %}
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            {% include 'SariAppBundle:Admin/partials:flashbag.html.twig' %}
+
+            {% block content %}
+
+            {% endblock %}
+
+        </section><!-- /.content -->
+    </div><!-- /.content-wrapper -->
+
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+            <b>Version</b> SARI - 1.0.0-Beta
+        </div>
+        {% block footer %}
+
+        {% endblock %}
+        <strong>Copyright &copy; 2015-2016</strong> - Tous droits réservés à
+        <a href="http://www.iut-lens.univ-artois.fr/">IUT de Lens</a>
+    </footer>
+</div><!-- ./wrapper -->
+
+
+<script src="{{ asset('bundles/sariapp/lib/jquery/jquery-1.12.1.min.js') }}"></script>
+<script src="{{ asset('bundles/sariapp/lib/bootstrap-3.3.6/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('bundles/sariapp/lib/AdminLTE-2.3.0/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
+<script src="{{ asset('bundles/sariapp/lib/AdminLTE-2.3.0/js/app.min.js') }}"></script>
+
+{% block script %}
+
+{% endblock %}
+</body>
+</html>

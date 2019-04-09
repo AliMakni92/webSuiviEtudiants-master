@@ -1,0 +1,33 @@
+{#
+    This template is used to render any error different from 403, 404 and 500.
+
+    This is the simplest way to customize error pages in Symfony applications.
+    In case you need it, you can also hook into the internal exception handling
+    made by Symfony. This allows you to perform advanced tasks and even recover
+    your application from some errors.
+    See http://symfony.com/doc/current/cookbook/controller/error_pages.html
+#}
+
+{% extends 'SariAppBundle::Front/layout.html.twig' %}
+
+{% block title %} Error - Suivi des étudiants{% endblock %}
+
+{% block body %}
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Erreur
+                </h1>
+                <p class="lead">
+                    Une erreur inconnue est survenue (HTTP {{ status_code }})
+                </p>
+                <p>
+                    Essayez de charger cette page dans quelques minutes ou
+                    <a href="{{ path('homepage') }}">revenir à la page d'accueil</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

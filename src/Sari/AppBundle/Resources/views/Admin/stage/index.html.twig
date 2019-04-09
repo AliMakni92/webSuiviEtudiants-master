@@ -1,0 +1,96 @@
+{% extends 'SariAppBundle::Admin/layout.html.twig' %}
+
+{% block title %} stage index{% endblock %}
+
+{% block contentheader %}
+    <h1>
+        stage
+        <small>index</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ path('admin_homepage') }}"><i class="fa fa-dashboard"></i> Accueil</a></li>
+        <li class="active"><i class="fa fa-building"></i> stage</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">
+                        Liste des <span class="badge bg-blue">{{ stages.getTotalItemCount }}</span>
+                        stages
+                    </h3>
+                    <div class="box-tools pull-right">
+                        <a href="{{ path('admin_stage_new') }}" class="btn btn-box-tool" data-toggle="tooltip"
+                           title="Ajouter stage">
+                            <i class="fa fa-plus"></i></a>
+                    </div>
+                </div><!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>{{ knp_pagination_sortable(stages, 'Id', 'e.id') }}</th>
+                            <th>Entreprise</th>
+                            <th>Professionnel</th>
+                            <th>Enseignant</th>
+                            <th>Etudiant</th>
+                            <th>Date début</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        {% for stage in stages %}
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <a href="{{ path('admin_stage_show', { 'id': stage.id }) }}">{{ stage.id }}</a>
+                                </td>
+                                <td>
+                                    <a href="{{ path('admin_entreprise_show', {'id' : stage.entreprise.id}) }}">{{ stage.entreprise.raisonSociale }}</a>
+                                </td>
+                                <td>
+                                    <a href="{{ path('admin_professionnel_show', {'id' : stage.professionnel.id}) }}">{{ stage.professionnel.personne.prenom }} {{ stage.professionnel.personne.nom }}</a>
+                                </td>
+                                <td>
+                                    <a href="{{ path('admin_enseignant_show', {'id' : stage.enseignant.id}) }}">{{ stage.enseignant.personne.prenom }} {{ stage.enseignant.personne.nom }}</a>
+                                </td>
+                                <td>
+                                    <a href="{{ path('admin_etudiant_show', {'id' : stage.etudiant.id}) }}">{{ stage.etudiant.personne.prenom }} {{ stage.etudiant.personne.nom }}</a>
+                                </td>
+                                <td>{{ stage.dateDebut|date("d/m/Y") }}</td>
+                                <td>
+                                    <a href="{{ path('admin_stage_show', { 'id': stage.id }) }}"
+                                       class="btn btn-xs btn-primary" data-toggle="tooltip" data-placement="left"
+                                       title="Voir stage de {{ stage.etudiant.personne.nom }}">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                    <a href="{{ path('admin_stage_edit', { 'id': stage.id }) }}"
+                                       class="btn btn-xs btn-success" data-toggle="tooltip" data-placement="left"
+                                       title="Modifier stage de {{ stage.etudiant.personne.nom }}">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        {% endfor %}
+                    </table>
+                </div><!-- /.box-body -->
+                <div class="box-footer">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            {{ knp_pagination_render(stages) }}
+                        </div>
+                        <div class="col-lg-6">
+                            <a href="{{ path('admin_stage_new') }}" class="btn btn-primary pull-right"><i
+                                        class="fa fa-plus-circle"></i> Ajouter un nouveau stage</a>
+                        </div>
+                    </div>
+                </div><!-- /.box-footer-->
+            </div><!-- /.box -->
+        </div>
+    </div>
+
+{% endblock %}

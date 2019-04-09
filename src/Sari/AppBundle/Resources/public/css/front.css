@@ -1,0 +1,12 @@
+body{
+    padding-top: 50px;
+}
+
+.navbar-brand {
+    padding: 1px;
+}
+
+#navbar-login-form {
+    padding: 15px;
+    min-width: 300px;
+}

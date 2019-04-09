@@ -1,0 +1,65 @@
+{% extends 'SariAppBundle::Front/layout.html.twig' %}
+
+
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="page-header">
+                <h1>Example page header
+                    <small>Subtext for header</small>
+                </h1>
+            </div>
+            <div class="col-md-8">
+
+                {% if etudiant %}
+                    <a class="btn btn-primary" href="{{ path('sari_show_etudiant', {'id' : etudiant.id}) }}">
+                        Voir votre profil étudiant
+                    </a>
+                {% else %}
+                    <a class="btn btn-primary" href="{{ path('sari_create_etudiant') }}">
+                        Vous n'avez pas de compte étudiant
+                    </a>
+                {% endif %}
+
+
+                {% if enseignant %}
+                    <a class="btn btn-primary" href="{{ path('sari_show_enseignant', {'id' : enseignant.id}) }}">
+                        Voir votre profil enseignant
+                    </a>
+                {% else %}
+                    <a class="btn btn-primary" href="{{ path('sari_create_enseignant') }}">
+                        Vous n'avez pas de compte enseignant
+                    </a>
+                {% endif %}
+
+
+
+                {% if professionnel %}
+
+                    <a class="btn btn-primary" href="{{ path('sari_show_professionnel', {'id' : professionnel.id}) }}">
+                        Voir votre profil professionnel
+                    </a>
+                {% else %}
+                    <a class="btn btn-primary" href="{{ path('sari_create_professionnel') }}">
+                        Vous n'avez pas de compte professionnel
+                    </a>
+                {% endif %}
+
+                {% if personne %}
+
+                    <a class="btn btn-primary" href="{{ path('sari_show_personne', {'id' : personne.id}) }}">
+                        Voir votre profil personne
+                    </a>
+                {% else %}
+                    <a class="btn btn-primary" href="{{ path('sari_create_personne') }}">
+                        Vous n'avez pas de compte personne
+                    </a>
+                {% endif %}
+
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

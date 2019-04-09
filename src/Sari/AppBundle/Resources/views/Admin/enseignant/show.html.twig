@@ -1,0 +1,71 @@
+{% extends 'SariAppBundle::Admin/layout.html.twig' %}
+
+{% block title %} enseignant {% endblock %}
+
+{% block contentheader %}
+    <h1>
+        Enteprise
+        <small>fiche information</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ path('admin_homepage') }}"><i class="fa fa-dashboard"></i> Accueil</a></li>
+        <li><a href="{{ path('admin_enseignant_index') }}"><i class="fa fa-building"></i> enseignant</a></li>
+        <li class="active">{{ enseignant.personne.nom }} {{ enseignant.personne.prenom }}</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+
+    <!-- Default box -->
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Informations</h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Réduire">
+                            <i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    Personne {{ enseignant.personne.id }} {{ enseignant.personne.nom }} {{ enseignant.personne.prenom }}
+                    Poste {{ enseignant.statut }}
+
+                    <h1>Les Etablissements de l'enseignant</h1>
+                    {% for etablissement in enseignant.etablissements %}
+                        <h3>{{ etablissement.nom }}</h3>
+                        <p>{{ etablissement.adresse.adr }}, {{ etablissement.adresse.complement }}, {{ etablissement.adresse.ville }} ({{ etablissement.adresse.codePostal }}) {{ etablissement.adresse.pays }}</p>
+                    {% endfor %}
+
+                    <div class="form-group">
+                        <a class="btn btn-lg btn-success"
+                           href="{{ path('admin_enseignant_edit', { 'id': enseignant.id }) }}"><i
+                                    class="fa fa-pencil"></i> Edit</a>
+                    </div>
+
+                    {{ form_start(delete_form) }}
+                    <div class="form-group">
+                        <button onclick="return confirm('Êtes-vous sûr de vouloir supprimer le enseignant ?');"
+                                type="submit"
+                                class="btn btn-lg btn-danger" data-toggle="tooltip"
+                                title="Supprimer la personne">
+                            <i class="fa fa-trash"></i> Supprimer
+                        </button>
+                    </div>
+                    {{ form_end(delete_form) }}
+
+                </div><!-- /.box-body -->
+                <div class="box-footer">
+                    <div class="row">
+                        <div class="col-lg-12">
+                        </div>
+                    </div>
+                </div><!-- /.box-footer-->
+            </div><!-- /.box -->
+        </div>
+
+
+    </div>
+{% endblock %}

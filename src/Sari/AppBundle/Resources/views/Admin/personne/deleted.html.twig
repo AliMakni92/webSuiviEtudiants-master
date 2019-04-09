@@ -1,0 +1,84 @@
+{% extends 'SariAppBundle::Admin/layout.html.twig' %}
+
+{% block title %} Corbeille Personne {% endblock %}
+
+{% block contentheader %}
+    <h1>
+        Personne
+        <small>corbeille</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ path('admin_homepage') }}"><i class="fa fa-dashboard"></i> Accueil</a></li>
+        <li><a href="{{ path('admin_personne_index') }}"><i class="fa fa-users"></i> Personne</a></li>
+        <li class="active"><i class="fa fa-trash"></i> Corbeille</li>
+    </ol>
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">
+                        Liste des <span class="badge bg-blue">{{ personnes.getTotalItemCount }}</span> personnes
+                    </h3>
+                    <div class="box-tools pull-right">
+                        <a href="{{ path('admin_personne_new') }}" class="btn btn-box-tool" data-toggle="tooltip"
+                           title="Ajouter personne">
+                            <i class="fa fa-user-plus"></i></a>
+                    </div>
+                </div><!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+
+                            <th>{{ knp_pagination_sortable(personnes, 'Id', 'p.id') }}</th>
+                            <th>{{ knp_pagination_sortable(personnes, 'Date de Suppréssion', 'p.deletedAt') }}</th>
+                            <th>{{ knp_pagination_sortable(personnes, 'Supprimer à', 'p.deletedAt') }}</th>
+                            <th>{{ knp_pagination_sortable(personnes, 'Prénom', 'p.prenom') }}</th>
+                            <th>{{ knp_pagination_sortable(personnes, 'Nom', 'p.nom') }}</th>
+                            <th>{{ knp_pagination_sortable(personnes, 'Sexe', 'p.sexe') }}</th>
+                            <th>Date de Naissance</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        {% for personne in personnes %}
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <a href="{{ path('admin_personne_show', { 'id': personne.id }) }}">{{ personne.id }}</a>
+                                </td>
+                                <td>{{ personne.deletedAt|date("d/m/Y G:i") }}</td>
+                                <td>{{ personne.deletedAt|ago }}</td>
+                                <td>{{ personne.prenom|capitalize }}</td>
+                                <td>{{ personne.nom|upper }}</td>
+                                <td>{{ personne.sexe }}</td>
+                                <td>{% if personne.datenaissance %}{{ personne.datenaissance|date('d/m/Y') }}{% endif %}</td>
+                                <td>
+                                    <a class="btn btn-xs  btn-warning" href="{{ path('admin_personne_restore', { 'id': personne.id }) }}">
+                                        <i class="fa fa-undo"></i> Restaurer</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        {% endfor %}
+                    </table>
+                </div><!-- /.box-body -->
+                <div class="box-footer">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            {{ knp_pagination_render(personnes) }}
+                        </div>
+                        <div class="col-lg-6">
+                            <a href="{{ path('admin_personne_index') }}" class="btn btn-primary pull-right"><i
+                                        class="fa fa-users"></i> Retour à la liste des personnes</a>
+                        </div>
+                    </div>
+                </div><!-- /.box-footer-->
+            </div><!-- /.box -->
+        </div>
+    </div>
+
+{% endblock %}

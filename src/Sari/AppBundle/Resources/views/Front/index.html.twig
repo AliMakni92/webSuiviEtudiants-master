@@ -1,0 +1,54 @@
+{% extends 'SariAppBundle::Front/layout.html.twig' %}
+
+
+{% block body %}
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Bienvenue{% if app.user %} {{ app.user }}{% endif %}
+                <small>Application Suivi des étudiants</small>
+            </h1>
+            <p>Cette application est dédiée aux différents suivis des étudiants de l'IUT de Lens du département
+                informatique. Elle permet la gestion des informations sur le cursus des étudiants pendant leur parcours
+                à l'IUT. Cette application permet d’accéder aux services et ressources numériques mis à votre
+                disposition, depuis n’importe quel lieu et à n’importe quel moment.
+                Ces services sont personnalisés en fonction de votre profil : étudiant / enseignant / professionnel</p>
+
+            <p><a class="btn btn-primary btn-lg" href="{{ path('information') }}" role="button">Lire plus &raquo;</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Étudiant</h2>
+                <p>L'application permet de suivre évolution du cursus des étudiants. D'obtenir des informations sur les
+                    différents établissements scolaires, avoir un suivi concernant ses propres formations. L'application
+                    permet aussi la gestion des stages, d'obtenir des informations sur les entreprises proposant des
+                    stages.</p>
+                <p><a class="btn btn-default" href="{{ path('fos_user_registration_register') }}" role="button">Inscription &raquo;</a>
+                </p>
+            </div>
+            <div class="col-md-4">
+                <h2>Enseignant</h2>
+                <p>L'application permet d'obtenir les informations des étudiants, ainsi que les entreprises. Les
+                    enseignants peuvent être de différents établissements; être tuteur de stage permet de mettre un
+                    suivi sur les étudiants. Les enseignants pourront prochainement mettre des notes aux étudiants en
+                    fonction de la matière et de la formation.</p>
+                <p><a class="btn btn-default" href="{{ path('fos_user_registration_register') }}" role="button">Inscription &raquo;</a>
+                </p>
+            </div>
+            <div class="col-md-4">
+                <h2>Professionnel</h2>
+                <p>Les professionnels peuvent ajouter une offre de stage afin de trouver des stagiaires plus rapidement
+                    avec un profil de recherche spécifique. L'application permet aux étudiants d'avoir une base de
+                    données concernant les différents stages mais aussi pour le recrutement et l'embauche.</p>
+                <p><a class="btn btn-default" href="{{ path('fos_user_registration_register') }}" role="button">Inscription &raquo;</a>
+                </p>
+            </div>
+        </div>
+
+    </div> <!-- /container -->
+
+{% endblock %}

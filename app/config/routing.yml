@@ -1,0 +1,54 @@
+sari_app_formation:
+    resource: "@SariAppBundle/Controller/FormationController.php"
+    type:     annotation
+
+sari_app_inscription:
+    resource: "@SariAppBundle/Controller/InscriptionController.php"
+    type:     annotation
+
+sari_app_stage:
+    resource: "@SariAppBundle/Controller/StageController.php"
+    type:     annotation
+
+sari_app_etudiant:
+    resource: "@SariAppBundle/Controller/EtudiantController.php"
+    type:     annotation
+
+sari_app_enseignant:
+    resource: "@SariAppBundle/Controller/EnseignantController.php"
+    type:     annotation
+
+sari_app_front:
+    resource: "@SariAppBundle/Controller/FrontController.php"
+    type:     annotation
+
+sari_app_professionnel:
+    resource: "@SariAppBundle/Controller/ProfessionnelController.php"
+    type:     annotation
+
+sari_app_etablissement:
+    resource: "@SariAppBundle/Controller/EtablissementController.php"
+    type:     annotation
+
+sari_app_entreprise:
+    resource: "@SariAppBundle/Controller/EntrepriseController.php"
+    type:     annotation
+
+sari_user_utilisateur:
+    resource: "@SariUserBundle/Controller/UtilisateurController.php"
+    type:     annotation
+
+sari_user:
+    resource: "@SariUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+sari_app:
+    resource: "@SariAppBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+
+bar_route:
+    resource: "@SariAppBundle/Controller/PersonneController.php"
+    type:     annotation
+    prefix:   /

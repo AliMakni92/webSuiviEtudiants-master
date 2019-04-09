@@ -1,0 +1,45 @@
+# Changelog
+
+Système de version :  http://semver.org/lang/fr/
+
+Notation numéro de version MAJEUR.MINEUR.CORRECTIF :
+1. le numéro de version MAJEUR quand il y a des changements rétro-incompatibles,
+2. le numéro de version MINEUR quand il y a des changements rétro-compatibles,
+3. le numéro de version de CORRECTIF quand il y a des corrections d’anomalies rétro-compatibles
+
+=======================
+Version 1.0.0-Beta
+- Adminstration
+- Front End
+
+Version 0.4.0-Beta
+- Refonte Base de données avec Repository
+- Personne REST Routing Annontation
+- Projet 2.8.2 Natif
+
+Version 0.3.0
+- Update Symfony 2.8.4
+- Administration
+    - Gestion Utilisateurs
+    - Gestion Personnes
+        - Import/Export au format xls
+    - Gestion Profesionnel
+    - Gestion Enseignant
+    - Gestion Entreprises
+
+Version 0.2.0
+- Symfony version 2.7.9
+- Administration
+    - Gestion partiels des utilisateurs
+    - Gestion partiels des personnes
+    - Gestion pré-complète des entreprises
+- Librairie frontend
+    - Installation bootstrap
+    - Installation Font-Awesome
+    - Installation SB-Admin pour la partie administration
+
+Version 0.1.0 - Reborn
+- Refonte totale du projet Application suivi des étudiants
+- Installation de Symfony version 2.7.6
+    - Configuration
+    - Externalisation du projet dans un Bundle de symfony : Sari/ApplicationBundle

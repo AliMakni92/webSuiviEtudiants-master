@@ -1,0 +1,75 @@
+{% extends 'SariAppBundle::Admin/layout.html.twig' %}
+
+{% block title %} formation {{ formation.libelleCourt }}{% endblock %}
+
+{% block contentheader %}
+    <h1>
+        Formation
+        <small>fiche information</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ path('admin_homepage') }}"><i class="fa fa-dashboard"></i> Accueil</a></li>
+        <li><a href="{{ path('admin_formation_index') }}"><i class="fa fa-university"></i> Formation</a></li>
+        <li class="active">Formation {{ formation.libelleCourt }}</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+
+    <!-- Default box -->
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Informations</h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Réduire">
+                            <i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+
+                    <p>id : {{ formation.id }}</p>
+                    <p>Libellé : {{ formation.libelle }}</p>
+                    <p>Libellé court : {{ formation.libelleCourt }}</p>
+                    <p>Description : {{ formation.description }}</p>
+                    <p>Etablissements proposant la formation : {% for etablissement in formation.etablissements %}{{ etablissement.nom }} {% endfor %}</p></p>
+
+
+                    <div class="form-group">
+                        <a class="btn btn-lg btn-success"
+                           href="{{ path('admin_formation_edit', { 'id': formation.id }) }}"><i
+                                    class="fa fa-pencil"></i> Edit</a>
+                    </div>
+
+                    {{ form_start(delete_form) }}
+                    <div class="form-group">
+                        <button onclick="return confirm('Êtes-vous sûr de vouloir supprimer l\'etablissement ?');"
+                                type="submit"
+                                class="btn btn-lg btn-danger" data-toggle="tooltip"
+                                title="Supprimer la formation">
+                            <i class="fa fa-trash"></i> Supprimer
+                        </button>
+                    </div>
+                    {{ form_end(delete_form) }}
+
+                </div><!-- /.box-body -->
+                <div class="box-footer">
+                    <div class="row">
+                        <div class="col-lg-12">
+                           {# <p>Ajouté le {{ formation.createdAt|date("d/m/Y G:i") }}
+                                {% if date(formation.updatedAt) > date(formation.createdAt) %}
+                                    et mis à jour {{ formation.updatedAt|ago }}
+                                {% endif %}
+                            </p>#}
+                        </div>
+                    </div>
+                </div><!-- /.box-footer-->
+            </div><!-- /.box -->
+        </div>
+
+
+    </div>
+{% endblock %}

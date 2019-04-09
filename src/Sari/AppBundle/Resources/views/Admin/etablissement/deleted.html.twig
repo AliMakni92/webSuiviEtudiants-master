@@ -1,0 +1,84 @@
+{% extends 'SariAppBundle::Admin/layout.html.twig' %}
+
+{% block title %} Corbeille Etablissement {% endblock %}
+
+{% block contentheader %}
+    <h1>
+        Etablissement
+        <small>corbeille</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ path('admin_homepage') }}"><i class="fa fa-dashboard"></i> Accueil</a></li>
+        <li><a href="{{ path('admin_etablissement_index') }}"><i class="fa fa-university"></i> Etablissement</a></li>
+        <li class="active"><i class="fa fa-trash"></i> Etablissement</li>
+    </ol>
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">
+                        Liste des <span class="badge bg-blue">{{ etablissements.getTotalItemCount }}</span>
+                        etablissements
+                    </h3>
+                    <div class="box-tools pull-right">
+                        <a href="{{ path('admin_etablissement_new') }}" class="btn btn-box-tool" data-toggle="tooltip"
+                           title="Ajouter etablissement">
+                            <i class="fa fa-plus"></i></a>
+                    </div>
+                </div><!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+
+                            <th>{{ knp_pagination_sortable(etablissements, 'Id', 'e.id') }}</th>
+                            <th>{{ knp_pagination_sortable(etablissements, 'Date de Suppréssion', 'e.deletedAt') }}</th>
+                            <th>{{ knp_pagination_sortable(etablissements, 'Supprimer à', 'e.deletedAt') }}</th>
+                            <th>{{ knp_pagination_sortable(etablissements, 'Nom', 'e.nom') }}</th>
+                            <th>{{ knp_pagination_sortable(etablissements, 'Type', 'e.typeEta') }}</th>
+                            <th>Adresse</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        {% for etablissement in etablissements %}
+                            <tbody>
+                            <tr>
+                                <td>{{ etablissement.id }}</td>
+                                <td>{{ etablissement.deletedAt|date("d/m/Y G:i") }}</td>
+                                <td>{{ etablissement.deletedAt|ago }}</td>
+                                <td>{{ etablissement.nom }}</td>
+                                <td>{{ etablissement.typeEta }}</td>
+                                <td>{{ etablissement.adresse.adr }}, {{ etablissement.adresse.ville }}
+                                    ({{ etablissement.adresse.codePostal }})
+                                </td>
+                                <td>
+                                    <a class="btn btn-xs btn-warning"
+                                       href="{{ path('admin_etablissement_restore', { 'id': etablissement.id }) }}">
+                                        <i class="fa fa-undo"></i> Restaurer</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        {% endfor %}
+                    </table>
+                </div><!-- /.box-body -->
+                <div class="box-footer">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            {{ knp_pagination_render(etablissements) }}
+                        </div>
+                        <div class="col-lg-6">
+                            <a href="{{ path('admin_etablissement_index') }}" class="btn btn-primary pull-right"><i
+                                        class="fa fa-university"></i> Retour à la liste des etablissement</a>
+                        </div>
+                    </div>
+                </div><!-- /.box-footer-->
+            </div><!-- /.box -->
+        </div>
+    </div>
+
+{% endblock %}

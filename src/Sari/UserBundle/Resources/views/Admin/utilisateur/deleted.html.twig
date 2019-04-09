@@ -1,0 +1,81 @@
+{% extends 'SariAppBundle::Admin/layout.html.twig' %}
+
+{% block title %} Corbeille Utilisateur {% endblock %}
+
+{% block contentheader %}
+    <h1>
+        Utilisateur
+        <small>corbeille</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ path('admin_homepage') }}"><i class="fa fa-dashboard"></i> Accueil</a></li>
+        <li><a href="{{ path('admin_utilisateur_index') }}"><i class="fa fa-users"></i> Utilisateur</a></li>
+        <li class="active"><i class="fa fa-trash"></i> Corbeille</li>
+    </ol>
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">
+                        Liste des <span class="badge bg-blue">{{ utilisateurs.getTotalItemCount }}</span> utilisateurs
+                    </h3>
+                </div><!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>{{ knp_pagination_sortable(utilisateurs, 'Id', 'u.id') }}</th>
+                            <th>{{ knp_pagination_sortable(utilisateurs, 'Date de Suppression', 'u.deletedAt') }}</th>
+                            <th>{{ knp_pagination_sortable(utilisateurs, 'Supprimer', 'u.deletedAt') }}</th>
+                            <th>{{ knp_pagination_sortable(utilisateurs, 'Identifiant', 'u.username') }}</th>
+                            <th>{{ knp_pagination_sortable(utilisateurs, 'Email', 'u.email') }}</th>
+                            <th>{{ knp_pagination_sortable(utilisateurs, 'Dernière connexion', 'u.lastLogin') }}</th>
+                            <th>Personne</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        {% for utilisateur in utilisateurs %}
+                            <tbody>
+                            <tr>
+                                <td>{{ utilisateur.id }}</td>
+                                <td>{{ utilisateur.deletedAt|date("d/m/Y G:i") }}</td>
+                                <td>{{ utilisateur.deletedAt|ago }}</td>
+                                <td>{{ utilisateur.username }}</td>
+                                <td><a href="mailto:{{ utilisateur.email }}" data-toggle="tooltip" data-placement="top" title="Envoyer un email">{{ utilisateur.email }} <i class="fa fa-envelope-o"></i></a></td>
+                                <td>{% if utilisateur.lastLogin is null %}-{% else %}{{ utilisateur.lastLogin|date("d/m/Y") }}{% endif %}</td>
+                                <td>{% if utilisateur.personne is null %}
+                                        -
+                                    {% else %}
+                                        <a href="{{ path('admin_personne_show', {'id' : utilisateur.personne.id}) }}">{{ utilisateur.personne.prenom }} {{ utilisateur.personne.nom }}</a>
+                                    {% endif %}</td>
+                                <td>
+                                    <a class="btn btn-xs  btn-warning"
+                                       href="{{ path('admin_utilisateur_restore', { 'id': utilisateur.id }) }}">
+                                        <i class="fa fa-undo"></i> Restaurer</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        {% endfor %}
+                    </table>
+                </div><!-- /.box-body -->
+                <div class="box-footer">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            {{ knp_pagination_render(utilisateurs) }}
+                        </div>
+                        <div class="col-lg-6">
+                            <a href="{{ path('admin_utilisateur_index') }}" class="btn btn-primary pull-right"><i
+                                        class="fa fa-users"></i> Retour à la liste des utilisateurs</a>
+                        </div>
+                    </div>
+                </div><!-- /.box-footer-->
+            </div><!-- /.box -->
+        </div>
+    </div>
+
+{% endblock %}

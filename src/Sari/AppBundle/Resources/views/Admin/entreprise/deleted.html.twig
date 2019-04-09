@@ -1,0 +1,85 @@
+{% extends 'SariAppBundle::Admin/layout.html.twig' %}
+
+{% block title %} Corbeille Entreprise {% endblock %}
+
+{% block contentheader %}
+    <h1>
+        Entreprise
+        <small>corbeille</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ path('admin_homepage') }}"><i class="fa fa-dashboard"></i> Accueil</a></li>
+        <li><a href="{{ path('admin_entreprise_index') }}"><i class="fa fa-building"></i> Entreprise</a></li>
+        <li class="active"><i class="fa fa-trash"></i> Entreprise</li>
+    </ol>
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">
+                        Liste des <span class="badge bg-blue">{{ entreprises.getTotalItemCount }}</span> entreprises
+                    </h3>
+                    <div class="box-tools pull-right">
+                        <a href="{{ path('admin_entreprise_new') }}" class="btn btn-box-tool" data-toggle="tooltip"
+                           title="Ajouter entreprise">
+                            <i class="fa fa-plus"></i></a>
+                    </div>
+                </div><!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+
+                            <th>{{ knp_pagination_sortable(entreprises, 'Id', 'e.id') }}</th>
+                            <th>{{ knp_pagination_sortable(entreprises, 'Date de Suppréssion', 'e.deletedAt') }}</th>
+                            <th>{{ knp_pagination_sortable(entreprises, 'Supprimer à', 'e.deletedAt') }}</th>
+                            <th>{{ knp_pagination_sortable(entreprises, 'Entreprise', 'e.raisonSociale') }}</th>
+                            <th>{{ knp_pagination_sortable(entreprises, 'Secteur d activite', 'e.secteurActivite') }}</th>
+                            <th>{{ knp_pagination_sortable(entreprises, 'Type entreprise', 'e.typeEntreprise') }}</th>
+                            <th>{{ knp_pagination_sortable(entreprises, 'Effectif', 'e.effectif') }}</th>
+                            <th>Ville</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        {% for entreprise in entreprises %}
+                            <tbody>
+                            <tr>
+                                <td>{{ entreprise.id }}</td>
+                                <td>{{ entreprise.deletedAt|date("d/m/Y G:i") }}</td>
+                                <td>{{ entreprise.deletedAt|ago }}</td>
+                                <td>{{ entreprise.raisonSociale }}</td>
+                                <td>{{ entreprise.secteurActivite }}</td>
+                                <td>{{ entreprise.typeEntreprise }}</td>
+                                <td>{{ entreprise.effectif }}</td>
+                                <td>{{ entreprise.adresse.ville }}</td>
+                                <td>
+                                    <a class="btn btn-xs btn-warning"
+                                       href="{{ path('admin_entreprise_restore', { 'id': entreprise.id }) }}">
+                                        <i class="fa fa-undo"></i> Restaurer</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        {% endfor %}
+                    </table>
+                </div><!-- /.box-body -->
+                <div class="box-footer">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            {{ knp_pagination_render(entreprises) }}
+                        </div>
+                        <div class="col-lg-6">
+                            <a href="{{ path('admin_entreprise_index') }}" class="btn btn-primary pull-right"><i
+                                        class="fa fa-users"></i> Retour à la liste des entreprises</a>
+                        </div>
+                    </div>
+                </div><!-- /.box-footer-->
+            </div><!-- /.box -->
+        </div>
+    </div>
+
+{% endblock %}

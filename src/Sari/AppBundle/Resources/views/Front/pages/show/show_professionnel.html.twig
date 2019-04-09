@@ -1,0 +1,76 @@
+{% extends 'SariAppBundle::Front/layout.html.twig' %}
+
+{% block body %}
+    {% block title %} professionnel {% endblock %}
+
+    {% block contentheader %}
+        <h1>
+            professionnel
+            <small>fiche information</small>
+        </h1>
+    {% endblock %}
+
+    {% block content %}
+
+        <!-- Default box -->
+        {% if professionnel is not null %}
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Informations</h3>
+                            <div class="box-tools pull-right">
+                                <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Réduire">
+                                    <i class="fa fa-minus"></i></button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <table class="table table-user-information">
+                                <tbody>
+                                    <tr>
+                                        <th>Entreprise : </th> <td>{{ professionnel.entreprise.id }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Personne : </th> <td>{{ professionnel.personne.id }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Poste : </th><td>{{ professionnel.poste }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Service : </th> <td>{{ professionnel.service }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Adresse : </th> <td>{{ professionnel.adrProfessionnel.adr }} {{ professionnel.adrProfessionnel.complement }} {{ professionnel.adrProfessionnel.codePostal }}</td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+
+                            <div class="form-group">
+                                <a class="btn btn-lg btn-success"
+                                   href="{{ path('sari_edit_professionnel', { 'id': professionnel.id }) }}"><i
+                                            class="fa fa-pencil"></i> Edit</a>
+                            </div>
+
+                        </div><!-- /.box-body -->
+                        <div class="box-footer">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                </div>
+                            </div>
+                        </div><!-- /.box-footer-->
+                    </div><!-- /.box -->
+                </div>
+
+
+            </div>
+        {% else %}
+                <a class="btn btn-primary" href="{{ path('sari_create_professionnel') }}">
+                    Je suis un professionnel
+                </a>
+        {% endif %}
+    {% endblock %}
+{% endblock %}

@@ -1,0 +1,140 @@
+{% extends 'SariAppBundle::Admin/layout.html.twig' %}
+
+{% block title %} Entreprise index{% endblock %}
+
+{% block contentheader %}
+    <h1>
+        Entreprise
+        <small>index</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ path('admin_homepage') }}"><i class="fa fa-dashboard"></i> Accueil</a></li>
+        <li class="active"><i class="fa fa-building"></i> Entreprise</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">
+                        Liste des <span class="badge bg-blue">{{ entreprises.getTotalItemCount }}</span> Entreprises
+                    </h3>
+                    <div class="box-tools pull-right">
+                        <a href="{{ path('admin_entreprise_new') }}" class="btn btn-box-tool" data-toggle="tooltip"
+                           title="Ajouter entreprise">
+                            <i class="fa fa-plus"></i></a>
+                        <a href="{{ path('admin_entreprise_deleted') }}" class="btn btn-box-tool" data-toggle="tooltip"
+                           title="Voir la corbeille">
+                            <i class="fa fa-trash-o"></i></a>
+                    </div>
+                    <div>
+                        <form class="form-inline pull-right" id="form_recherche"
+                              action="{{ path('admin_entreprise_search') }}" method="GET">
+                            <div class="form-group">
+                                <label for="perpage">Ligne par page:</label>
+                                <select id="perpage" name="nbperpage" class="form-control">
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option selected="selected" value="20">20</option>
+                                    <option value="30">30</option>
+                                    <option value="40">40</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                    <option value="200">200</option>
+                                    <option value="300">300</option>
+                                    <option value="400">400</option>
+                                    <option value="500">500</option>
+                                    <option value="1000">1000</option>
+                                </select>
+                            </div> <!-- form group [rows] -->
+
+                            <div class="form-group">
+                                <label class="sr-only" for="search">Recherche</label>
+                                <div class="input-group">
+                                    <input id="search" name="search" type="text" class="form-control"
+                                           placeholder="Recherche par nom sociale">
+
+                                    <div class="input-group-btn">
+                                        <button type="submit" class="btn btn-default" data-toggle="tooltip"
+                                                title="Rechercher"><i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div><!-- form group [search] -->
+                        </form>
+                    </div>
+                </div><!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>{{ knp_pagination_sortable(entreprises, 'Id', 'e.id') }}</th>
+                            <th>{{ knp_pagination_sortable(entreprises, 'Entreprise', 'e.raisonSociale') }}</th>
+                            <th>{{ knp_pagination_sortable(entreprises, 'Secteur d\'activite', 'e.secteurActivite') }}</th>
+                            <th>{{ knp_pagination_sortable(entreprises, 'Type entreprise', 'e.typeEntreprise') }}</th>
+                            <th>{{ knp_pagination_sortable(entreprises, 'Effectif', 'e.effectif') }}</th>
+                            <th>Adresse</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        {% for entreprise in entreprises %}
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <a href="{{ path('admin_entreprise_show', { 'id': entreprise.id }) }}">{{ entreprise.id }}</a>
+                                </td>
+                                <td>{{ entreprise.raisonSociale }}</td>
+                                <td>{{ entreprise.secteurActivite }}</td>
+                                <td>{{ entreprise.typeEntreprise }}</td>
+                                <td>{{ entreprise.effectif }}</td>
+                                <td>{% if(entreprise.adresse.adr) %}{{ entreprise.adresse.adr }} {{ entreprise.adresse.complement }}, {{ entreprise.adresse.codePostal }} {{ entreprise.adresse.ville }}{% endif %}</td>
+                                <td>
+                                    <a href="{{ path('admin_entreprise_show', { 'id': entreprise.id }) }}"
+                                       class="btn btn-xs btn-primary" data-toggle="tooltip" data-placement="left"
+                                       title="Voir {{ entreprise.raisonSociale }}">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                    <a href="{{ path('admin_entreprise_edit', { 'id': entreprise.id }) }}"
+                                       class="btn btn-xs btn-success" data-toggle="tooltip" data-placement="left"
+                                       title="Modifier {{ entreprise.raisonSociale }}">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                    <a target="_blank"
+                                       href="https://www.google.fr/maps/place/{{ entreprise.adresse.adr }} {{ entreprise.adresse.codePostal }} {{ entreprise.adresse.ville }} {{ entreprise.adresse.pays }}"
+                                       class="btn btn-xs btn-info" data-toggle="tooltip" data-placement="left"
+                                       title="Voir la map {{ entreprise.raisonSociale }}">
+                                        <i class="fa fa-map"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        {% endfor %}
+                    </table>
+                </div><!-- /.box-body -->
+                <div class="box-footer">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            {{ knp_pagination_render(entreprises) }}
+                        </div>
+                        <div class="col-lg-6">
+                            <a href="{{ path('admin_entreprise_new') }}" class="btn btn-primary pull-right"><i
+                                        class="fa fa-plus-circle"></i> Ajouter une nouvelle entreprise</a>
+                        </div>
+                    </div>
+                </div><!-- /.box-footer-->
+            </div><!-- /.box -->
+        </div>
+    </div>
+
+{% endblock %}

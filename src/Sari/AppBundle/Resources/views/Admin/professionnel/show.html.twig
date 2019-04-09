@@ -1,0 +1,71 @@
+{% extends 'SariAppBundle::Admin/layout.html.twig' %}
+
+{% block title %} Professionnel {% endblock %}
+
+{% block contentheader %}
+    <h1>
+        Enteprise
+        <small>fiche information</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ path('admin_homepage') }}"><i class="fa fa-dashboard"></i> Accueil</a></li>
+        <li><a href="{{ path('admin_professionnel_index') }}"><i class="fa fa-building"></i> Professionnel</a></li>
+        <li class="active">{{ professionnel.personne.nom }} {{ professionnel.personne.prenom }}</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+
+    <!-- Default box -->
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Informations</h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Réduire">
+                            <i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <p><strong>Entreprise :</strong> {{ professionnel.entreprise.raisonSociale }}</p>
+                    <p><strong>Personne :</strong> {{ professionnel.personne.prenom }} {{ professionnel.personne.nom }}
+                    </p>
+                    <p><strong>Poste :</strong> {{ professionnel.poste }}</p>
+                    <p><strong>Service :</strong> {{ professionnel.service }}</p>
+                    <p><strong>Adresse
+                            :</strong> {{ professionnel.adrProfessionnel.adr }} {{ professionnel.adrProfessionnel.complement }} {{ professionnel.adrProfessionnel.codePostal }}
+                    </p>
+
+                    <div class="form-group">
+                        <a class="btn btn-lg btn-success"
+                           href="{{ path('admin_professionnel_edit', { 'id': professionnel.id }) }}"><i
+                                    class="fa fa-pencil"></i> Edit</a>
+                    </div>
+
+                    {{ form_start(delete_form) }}
+                    <div class="form-group">
+                        <button onclick="return confirm('Êtes-vous sûr de vouloir supprimer le professionnel ?');"
+                                type="submit"
+                                class="btn btn-lg btn-danger" data-toggle="tooltip"
+                                title="Supprimer la personne">
+                            <i class="fa fa-trash"></i> Supprimer
+                        </button>
+                    </div>
+                    {{ form_end(delete_form) }}
+
+                </div><!-- /.box-body -->
+                <div class="box-footer">
+                    <div class="row">
+                        <div class="col-lg-12">
+                        </div>
+                    </div>
+                </div><!-- /.box-footer-->
+            </div><!-- /.box -->
+        </div>
+
+
+    </div>
+{% endblock %}

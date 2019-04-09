@@ -1,0 +1,88 @@
+{% extends 'SariAppBundle::Admin/layout.html.twig' %}
+
+{% block title %} Professionnel index{% endblock %}
+
+{% block contentheader %}
+    <h1>
+        professionnel
+        <small>index</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ path('admin_homepage') }}"><i class="fa fa-dashboard"></i> Accueil</a></li>
+        <li class="active"><i class="fa fa-building"></i> professionnel</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">
+                        Liste des <span class="badge bg-blue">{{ professionnels.getTotalItemCount }}</span>
+                        professionnels
+                    </h3>
+                    <div class="box-tools pull-right">
+                        <a href="{{ path('admin_professionnel_new') }}" class="btn btn-box-tool" data-toggle="tooltip"
+                           title="Ajouter professionnel">
+                            <i class="fa fa-plus"></i></a>
+                    </div>
+                </div><!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>{{ knp_pagination_sortable(professionnels, 'Id', 'p.id') }}</th>
+                            <th>Personne</th>
+                            <th>Entreprise</th>
+                            <th>{{ knp_pagination_sortable(professionnels, 'Service', 'p.service') }}</th>
+                            <th>{{ knp_pagination_sortable(professionnels, 'Poste', 'p.poste') }}</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        {% for professionnel in professionnels %}
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <a href="{{ path('admin_professionnel_show', { 'id': professionnel.id }) }}">{{ professionnel.id }}</a>
+                                </td>
+                                <td>
+                                    <a href="{{ path('admin_personne_show', {'id' : professionnel.personne.id}) }}">{{ professionnel.personne.prenom }} {{ professionnel.personne.nom }}</a>
+                                </td>
+                                <td>{{ professionnel.entreprise.raisonSociale }}</td>
+                                <td>{{ professionnel.service }}</td>
+                                <td>{{ professionnel.poste }}</td>
+                                <td>
+                                    <a href="{{ path('admin_professionnel_show', { 'id': professionnel.id }) }}"
+                                       class="btn btn-xs btn-primary" data-toggle="tooltip" data-placement="left"
+                                       title="Voir {{ professionnel.personne.nom }}">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                    <a href="{{ path('admin_professionnel_edit', { 'id': professionnel.id }) }}"
+                                       class="btn btn-xs btn-success" data-toggle="tooltip" data-placement="left"
+                                       title="Modifier {{ professionnel.personne.nom }}">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        {% endfor %}
+                    </table>
+                </div><!-- /.box-body -->
+                <div class="box-footer">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            {{ knp_pagination_render(professionnels) }}
+                        </div>
+                        <div class="col-lg-6">
+                            <a href="{{ path('admin_professionnel_new') }}" class="btn btn-primary pull-right"><i
+                                        class="fa fa-plus-circle"></i> Ajouter une nouvelle professionnel</a>
+                        </div>
+                    </div>
+                </div><!-- /.box-footer-->
+            </div><!-- /.box -->
+        </div>
+    </div>
+
+{% endblock %}

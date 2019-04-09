@@ -1,0 +1,268 @@
+{% extends 'SariAppBundle::Admin/layout.html.twig' %}
+
+{% block title %} Profil {{ personne.prenom }} {{ personne.nom }}{% endblock %}
+
+{% block contentheader %}
+    <h1>
+        Personne
+        <small>information</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ path('admin_homepage') }}"><i class="fa fa-dashboard"></i> Accueil</a></li>
+        <li><a href="{{ path('admin_personne_index') }}"><i class="fa fa-users"></i> Personne</a></li>
+        <li class="active">Profil</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+
+    <!-- Default box -->
+
+    <div class="row">
+
+        <div class="col-md-9">
+
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Informations</h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Réduire">
+                            <i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <table>
+                        <tbody>
+                        <tr>
+                            <th>Id :</th>
+                            <td>{{ personne.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nom :</th>
+                            <td>{{ personne.nom }}</td>
+                        </tr>
+                        <tr>
+                            <th>Prenom :</th>
+                            <td>{{ personne.prenom }}</td>
+                        </tr>
+                        <tr>
+                            <th>Sexe :</th>
+                            <td>{{ personne.sexe }}</td>
+                        </tr>
+                        <tr>
+                            <th>Date de Naissance :</th>
+                            <td>{% if personne.datenaissance %}{{ personne.datenaissance|date('d/m/Y') }}{% endif %}</td>
+                        </tr>
+                        <tr>
+                            <th>Adresse :</th>
+                            <td>{{ personne.adrPersonnel.adr }}</td>
+                        </tr>
+                        <tr>
+                            <th>Complèment :</th>
+                            <td>{{ personne.adrPersonnel.complement }}</td>
+                        </tr>
+                        <tr>
+                            <th>Code postale :</th>
+                            <td>{{ personne.adrPersonnel.codepostal }}</td>
+                        </tr>
+                        <tr>
+                            <th>Ville :</th>
+                            <td>{{ personne.adrPersonnel.ville }}</td>
+                        </tr>
+                        <tr>
+                            <th>Pays :</th>
+                            <td>{{ personne.adrPersonnel.pays }}</td>
+                        </tr>
+                        <tr>
+                            <th>Téléphone Fixe :</th>
+                            <td>{{ personne.adrPersonnel.telfixe }}</td>
+                        </tr>
+                        <tr>
+                            <th>Téléphone Portable :</th>
+                            <td>{{ personne.adrPersonnel.telport }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="form-group">
+                        <a class="btn btn-lg btn-success"
+                           href="{{ path('admin_personne_edit', { 'id': personne.id }) }}"><i class="fa fa-pencil"></i>Edit</a>
+                    </div>
+
+                    {{ form_start(delete_form) }}
+                    <div class="form-group">
+                        <button onclick="return confirm('Êtes-vous sûr de vouloir supprimer la personne ?');"
+                                type="submit"
+                                class="btn btn-lg btn-danger" data-toggle="tooltip"
+                                title="Supprimer la personne">
+                            <i class="fa fa-trash"></i> Supprimer
+                        </button>
+                    </div>
+                    {{ form_end(delete_form) }}
+
+                </div><!-- /.box-body -->
+                <div class="box-footer">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p>Ajouté le {{ personne.createdAt|date("d/m/Y G:i") }}
+                                {% if date(personne.updatedAt) > date(personne.createdAt) %}
+                                    et mis à jour {{ personne.updatedAt|ago }}
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div><!-- /.box-footer-->
+            </div><!-- /.box -->
+        </div>
+
+        <div class="col-md-3">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Photo</h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                title="Réduire">
+                            <i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+
+                    <img class="img-responsive"
+                         src="{{ vich_uploader_asset(personne, 'photoFile', 'Sari\\AppBundle\\Entity\\Personne') }}"
+                         alt="photo de {{ personne.prenom }} {{ personne.nom }}">
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+
+
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Etudiant</h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                title="Réduire">
+                            <i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    {% if(etudiant is not null) %}
+                        <p><strong>Numéro étudiant :</strong> {{ etudiant.numEtudiant }}</p>
+                        <p><strong>Numéro INE :</strong> {{ etudiant.numIne }}</p>
+                        <p><strong>Etablissement :</strong> <a
+                                    href="{{ path('admin_etablissement_show', {'id' : etudiant.etablissement.id }) }}"></a>{{ etudiant.etablissement.nom }}
+                        </p>
+
+                        <h3>Inscriptions</h3>
+                        <ul>
+                            {% for inscription in etudiant.inscriptions %}
+                                <li>
+                                    <p><strong>Année : </strong>{{ inscription.anneeInscription }}</p>
+                                    <p><strong>Formation : </strong>{{ inscription.formation.libelle }}
+                                        ({{ inscription.formation.libelleCourt }})</p>
+                                    <p><strong>Résultat : </strong>{{ inscription.resultat }}</p>
+                                </li>
+                            {% endfor %}
+                        </ul>
+
+                        <h3>Stages</h3>
+                        <ul>
+                            {% for stage in etudiant.stages %}
+                                <li>
+                                    <p><strong>Sujet : </strong>{{ stage.sujet }} dans l'entreprise <a
+                                                href="{{ path('admin_entreprise_show', {'id' : stage.entreprise.id}) }}">{{ stage.entreprise.raisonSociale }}</a>
+                                    </p>
+                                </li>
+                                <li>Commentaires:</li>
+                                <ul>
+                                    {% for suivi in stage.suivisStage %}
+                                        <li>"{{ suivi.commentaire }}" {{ suivi.created|ago }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <a class="btn btn-primary" href="{{ path('admin_etudiant_new') }}">Ajouter étudiant</a>
+                    {% endif %}
+
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+        </div>
+        <div class="col-md-4">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Enseignant</h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                title="Réduire">
+                            <i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    {% if(enseignant is not null) %}
+                        <p><strong>Etablissements :</strong>
+                        <ul>
+                            {% for etablissement in enseignant.etablissements %}
+                                <li>
+                                    <a href="{{ path('admin_etablissement_show', {'id' : etablissement.id }) }}">{{ etablissement.nom }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+
+                        <h3>Stages (Tuteur Enseignant)</h3>
+                        <ul>
+                            {% for stage in enseignant.stages %}
+                                <li><p><strong>Sujet : </strong>{{ stage.sujet }} (<strong>Etudiant
+                                            : </strong> {{ stage.etudiant.personne.prenom }} {{ stage.etudiant.personne.nom }}
+                                        ) </p></li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <a class="btn btn-primary" href="{{ path('admin_enseignant_new') }}">Ajouter enseignant</a>
+                    {% endif %}
+
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+
+
+        </div>
+        <div class="col-md-4">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Professionnel</h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                title="Réduire">
+                            <i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    {% if(professionnel is not null) %}
+                        <p>
+                            <strong>Entreprise :</strong>
+                            <a href="{{ path('admin_entreprise_show', {'id' : professionnel.entreprise.id }) }}">{{ professionnel.entreprise.raisonSociale }}</a>
+                        </p>
+                        <h3>Stages (Tuteur Professionnel)</h3>
+                        <ul>
+                            {% for stage in professionnel.stages %}
+                                <li><p><strong>Sujet : </strong>{{ stage.sujet }} (<strong>Etudiant
+                                            : </strong> {{ stage.etudiant.personne.prenom }} {{ stage.etudiant.personne.nom }}
+                                        ) </p></li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <a class="btn btn-primary" href="{{ path('admin_professionnel_new') }}">Ajouter
+                            professionnel</a>
+                    {% endif %}
+
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+
+
+        </div>
+    </div>
+{% endblock %}
+

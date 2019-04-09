@@ -1,0 +1,167 @@
+{% extends 'SariAppBundle::Admin/layout.html.twig' %}
+
+{% block title %} Personne Administration {% endblock %}
+
+{% block contentheader %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        {# Utilisateurs #}
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-aqua">
+                <div class="inner">
+                    <h3>{{ nb.utilisateur }}</h3>
+                    <p>Utilisateurs</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-users"></i>
+                </div>
+                <a href="{{ path('admin_utilisateur_index') }}" class="small-box-footer">
+                    Voir plus <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div><!-- ./col -->
+
+        {# Personne #}
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-aqua">
+                <div class="inner">
+                    <h3>{{ nb.personne }}</h3>
+                    <p>Personnes</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-male"></i>
+                </div>
+                <a href="{{ path('admin_personne_index') }}" class="small-box-footer">
+                    Voir plus <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div><!-- ./col -->
+
+        {# Entreprise #}
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h3>{{ nb.entreprise }}</h3>
+                    <p>Entreprises</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-building"></i>
+                </div>
+                <a href="{{ path('admin_entreprise_index') }}" class="small-box-footer">
+                    Voir plus <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div><!-- ./col -->
+
+        {# Professionnels #}
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h3>{{ nb.professionnel }}</h3>
+                    <p>Professionnels</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-briefcase"></i>
+                </div>
+                <a href="{{ path('admin_professionnel_index') }}" class="small-box-footer">
+                    Voir plus <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div><!-- ./col -->
+
+        {# Etablissement #}
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h3>{{ nb.etablissement }}</h3>
+                    <p>Établissements</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-university"></i>
+                </div>
+                <a href="{{ path('admin_etablissement_index') }}" class="small-box-footer">
+                    Voir plus <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div><!-- ./col -->
+
+        {# Enseignant #}
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h3>{{ nb.enseignant }}</h3>
+                    <p>Enseignants</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-book"></i>
+                </div>
+                <a href="#" class="small-box-footer">
+                    Voir plus <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div><!-- ./col -->
+
+        {# Etudiant #}
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h3>{{ nb.etudiant }}</h3>
+                    <p>Étudiants</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-graduation-cap"></i>
+                </div>
+                <a href="#" class="small-box-footer">
+                    Voir plus <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div><!-- ./col -->
+
+        {# Stage #}
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-red">
+                <div class="inner">
+                    <h3>{{ nb.stage }}</h3>
+                    <p>Stages</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-laptop"></i>
+                </div>
+                <a href="#" class="small-box-footer">
+                    Voir plus <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div><!-- ./col -->
+
+        {# Inscription #}
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-red">
+                <div class="inner">
+                    <h3>{{ nb.inscription }}</h3>
+                    <p>Inscription étudiants dans les établissements</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-pencil"></i>
+                </div>
+                <a href="#" class="small-box-footer">
+                    Voir plus <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div><!-- ./col -->
+
+    </div><!-- /.row -->
+
+{% endblock %}

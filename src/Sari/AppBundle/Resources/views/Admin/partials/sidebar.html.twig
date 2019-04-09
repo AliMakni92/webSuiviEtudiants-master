@@ -1,0 +1,236 @@
+<!-- Menu sidebar -->
+<aside class="main-sidebar">
+    <section class="sidebar">
+        <ul class="sidebar-menu">
+            <li class="header">NAVIGATION</li>
+            <li>
+                <a href="{{ path('homepage') }}">
+                    <i class="fa fa-home"></i> <span>Retour au Site</span></a>
+            </li>
+            <li class="header">GENERAL</li>
+            <li {% if app.request.attributes.get('_route') == 'admin_homepage' %} class="active"{% endif %}>
+                <a href="{{ path('admin_homepage') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+            </li>
+            <li class="header">UTILISATEURS</li>
+            <li class="treeview {% if app.request.attributes.get('_route') starts with 'admin_utilisateur' %}active{% endif %}">
+                <a href="#">
+                    <i class="fa fa-users"></i> <span>Utilisateur</span> <i
+                            class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li {% if app.request.attributes.get('_route') == 'admin_utilisateur_index' %} class="active"{% endif %}>
+                        <a href="{{ path('admin_utilisateur_index') }}">
+                            <i class="fa fa-eye"></i> Liste des utilisateurs
+                        </a>
+                    </li>
+                    <li {% if app.request.attributes.get('_route') == 'admin_utilisateur_new' %} class="active"{% endif %}>
+                        <a href="{{ path('fos_user_registration_register') }}">
+                            <i class="fa fa-user-plus"></i> Ajouter un utilisateur</i>
+                        </a>
+                    </li>
+                    <li {% if app.request.attributes.get('_route') == 'admin_utilisateur_deleted' %} class="active"{% endif %}>
+                        <a href="{{ path('admin_utilisateur_deleted') }}">
+                            <i class="fa fa-trash"></i> Voir la corbeille</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="treeview {% if app.request.attributes.get('_route') starts with 'admin_personne' %}active{% endif %}">
+                <a href="#">
+                    <i class="fa fa-male"></i> <span>Personne</span> <i
+                            class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li {% if app.request.attributes.get('_route') == 'admin_personne_index' %} class="active"{% endif %}>
+                        <a href="{{ path('admin_personne_index') }}">
+                            <i class="fa fa-eye"></i> Liste des personnes
+                        </a>
+                    </li>
+                    <li {% if app.request.attributes.get('_route') == 'admin_personne_new' %} class="active"{% endif %}>
+                        <a href="{{ path('admin_personne_new') }}">
+                            <i class="fa fa-user-plus"></i> Ajouter une personne
+                        </a>
+                    </li>
+                    <li {% if app.request.attributes.get('_route') == 'admin_personne_deleted' %} class="active"{% endif %}>
+                        <a href="{{ path('admin_personne_deleted') }}">
+                            <i class="fa fa-trash"></i> Voir la corbeille</a>
+                    </li>
+                    <li {% if app.request.attributes.get('_route') == 'admin_personne_export' %} class="active"{% endif %}>
+                        <a href="{{ path('admin_personne_export') }}">
+                            <i class="fa fa-cloud-download"></i> Exportation des
+                            personnes
+                        </a>
+                    </li>
+                    <li {% if app.request.attributes.get('_route') == 'admin_personne_import' %} class="active"{% endif %}>
+                        <a href="{{ path('admin_personne_import') }}">
+                            <i class="fa fa-cloud-upload"></i> Importation des personnes
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="header">BÂTIMENTS</li>
+            <li class="treeview {% if app.request.attributes.get('_route') starts with 'admin_entreprise' %}active{% endif %}">
+                <a href="#">
+                    <i class="fa fa-building"></i> <span>Entreprise</span> <i
+                            class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li {% if app.request.attributes.get('_route') == 'admin_entreprise_index' %} class="active"{% endif %}>
+                        <a href="{{ path('admin_entreprise_index') }}">
+                            <i class="fa fa-eye"></i> Liste des entreprises
+                        </a>
+                    </li>
+                    <li {% if app.request.attributes.get('_route') == 'admin_entreprise_new' %} class="active"{% endif %}>
+                        <a href="{{ path('admin_entreprise_new') }}">
+                            <i class="fa fa-plus-circle"></i> Ajouter une entreprise
+                        </a>
+                    </li>
+                    <li {% if app.request.attributes.get('_route') == 'admin_entreprise_deleted' %} class="active"{% endif %}>
+                        <a href="{{ path('admin_entreprise_deleted') }}">
+                            <i class="fa fa-trash"></i> Voir la corbeille</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="treeview {% if app.request.attributes.get('_route') starts with 'admin_etablissement' %}active{% endif %}">
+                <a href="#">
+                    <i class="fa fa-university"></i> <span>Etablissement</span> <i
+                            class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li {% if app.request.attributes.get('_route') == 'admin_etablissement_index' %} class="active"{% endif %}>
+                        <a href="{{ path('admin_etablissement_index') }}">
+                            <i class="fa fa-eye"></i> Liste des etablissements
+                        </a>
+                    </li>
+                    <li {% if app.request.attributes.get('_route') == 'admin_etablissement_new' %} class="active"{% endif %}>
+                        <a href="{{ path('admin_etablissement_new') }}">
+                            <i class="fa fa-plus-circle"></i> Ajouter un etablissement
+                        </a>
+                    </li>
+                    <li {% if app.request.attributes.get('_route') == 'admin_etablissement_deleted' %} class="active"{% endif %}>
+                        <a href="{{ path('admin_etablissement_deleted') }}">
+                            <i class="fa fa-trash"></i> Voir la corbeille</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="header">ADMINISTRATIF</li>
+            <li class="treeview {% if app.request.attributes.get('_route') starts with 'admin_professionnel' %}active{% endif %}">
+                <a href="#">
+                    <i class="fa fa-briefcase"></i> <span>Professionnel</span> <i
+                            class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li {% if app.request.attributes.get('_route') == 'admin_professionnel_index' %} class="active"{% endif %}>
+                        <a href="{{ path('admin_professionnel_index') }}">
+                            <i class="fa fa-eye"></i> Liste des professionnels
+                        </a>
+                    </li>
+                    <li {% if app.request.attributes.get('_route') == 'admin_professionnel_new' %} class="active"{% endif %}>
+                        <a href="{{ path('admin_professionnel_new') }}">
+                            <i class="fa fa-plus-circle"></i> Ajouter un professionnel
+                        </a>
+                    </li>
+
+                    <li {% if app.request.attributes.get('_route') == 'admin_professionnel_deleted' %} class="active"{% endif %}>
+                        <a href="{{ path('admin_professionnel_deleted') }}">
+                            <i class="fa fa-trash"></i> Voir la corbeille</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="treeview {% if app.request.attributes.get('_route') starts with 'admin_enseignant' %}active{% endif %}">
+                <a href="#">
+                    <i class="fa fa-book"></i> <span>Enseignant</span> <i
+                            class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li {% if app.request.attributes.get('_route') == 'admin_enseignant_index' %} class="active"{% endif %}>
+                        <a href="{{ path('admin_enseignant_index') }}">
+                            <i class="fa fa-eye"></i> Liste des enseignants
+                        </a>
+                    </li>
+                    <li {% if app.request.attributes.get('_route') == 'admin_enseignant_new' %} class="active"{% endif %}>
+                        <a href="{{ path('admin_enseignant_new') }}">
+                            <i class="fa fa-plus-circle"></i> Ajouter un enseignant
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="treeview {% if app.request.attributes.get('_route') starts with 'admin_etudiant' %}active{% endif %}">
+                <a href="#">
+                    <i class="fa fa-graduation-cap"></i> <span>Etudiant</span> <i
+                            class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li {% if app.request.attributes.get('_route') == 'admin_etudiant_index' %} class="active"{% endif %}>
+                        <a href="{{ path('admin_etudiant_index') }}">
+                            <i class="fa fa-eye"></i> Liste des étudiants
+                        </a>
+                    </li>
+                    <li {% if app.request.attributes.get('_route') == 'admin_etudiant_new' %} class="active"{% endif %}>
+                        <a href="{{ path('admin_etudiant_new') }}">
+                            <i class="fa fa-plus-circle"></i> Ajouter un étudiant
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="header">INSCRIPTIONS</li>
+            <li class="treeview {% if app.request.attributes.get('_route') starts with 'admin_formation' %}active{% endif %}">
+                <a href="#">
+                    <i class="fa fa-bookmark"></i> <span>formation</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li {% if app.request.attributes.get('_route') == 'admin_formation_index' %} class="active"{% endif %}>
+                        <a href="{{ path('admin_formation_index') }}">
+                            <i class="fa fa-eye"></i> Liste des formations
+                        </a>
+                    </li>
+                    <li {% if app.request.attributes.get('_route') == 'admin_formation_new' %} class="active"{% endif %}>
+                        <a href="{{ path('admin_formation_new') }}">
+                            <i class="fa fa-plus-circle"></i> Ajouter une formation
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="treeview {% if app.request.attributes.get('_route') starts with 'admin_inscription' %}active{% endif %}">
+                <a href="#">
+                    <i class="fa fa-pencil"></i> <span>Inscription</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li {% if app.request.attributes.get('_route') == 'admin_inscription_index' %} class="active"{% endif %}>
+                        <a href="{{ path('admin_inscription_index') }}">
+                            <i class="fa fa-eye"></i> Liste des inscriptions
+                        </a>
+                    </li>
+                    <li {% if app.request.attributes.get('_route') == 'admin_inscription_new' %} class="active"{% endif %}>
+                        <a href="{{ path('admin_inscription_new') }}">
+                            <i class="fa fa-plus-circle"></i> Ajouter une inscription
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="treeview {% if app.request.attributes.get('_route') starts with 'admin_stage' %}active{% endif %}">
+                <a href="#">
+                    <i class="fa fa-graduation-cap"></i> <span>Stage</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li {% if app.request.attributes.get('_route') == 'admin_stage_index' %} class="active"{% endif %}>
+                        <a href="{{ path('admin_stage_index') }}">
+                            <i class="fa fa-laptop"></i> Liste des stages
+                        </a>
+                    </li>
+                    <li {% if app.request.attributes.get('_route') == 'admin_stage_new' %} class="active"{% endif %}>
+                        <a href="{{ path('admin_stage_new') }}">
+                            <i class="fa fa-plus-circle"></i> Ajouter un stage
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>

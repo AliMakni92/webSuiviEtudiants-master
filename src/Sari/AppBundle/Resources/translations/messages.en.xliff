@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>year</source>
+                <target>Year</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>month</source>
+                <target>Month</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>day</source>
+                <target>Day</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>Adr personnel</source>
+                <target>Personal Address</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

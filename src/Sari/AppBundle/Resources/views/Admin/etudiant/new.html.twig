@@ -1,0 +1,36 @@
+{% extends 'SariAppBundle::Admin/layout.html.twig' %}
+
+{% block title %} Ajout etudiant {% endblock %}
+
+{% block contentheader %}
+    <h1>
+        Entreprise
+        <small>nouveau</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ path('admin_homepage') }}"><i class="fa fa-dashboard"></i> Accueil</a></li>
+        <li><a href="{{ path('admin_entreprise_index') }}"><i class="fa fa-building"></i> Entreprise</a></li>
+        <li class="active">Nouveau étudiant</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+
+    <!-- Default box -->
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Formulaire de création</h3>
+            <div class="box-tools pull-right">
+                <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Réduire"><i
+                            class="fa fa-minus"></i></button>
+            </div>
+        </div>
+        <div class="box-body">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+            {{ form_end(form) }}
+        </div><!-- /.box-body -->
+    </div><!-- /.box -->
+
+{% endblock %}

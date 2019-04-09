@@ -1,0 +1,41 @@
+{% extends 'SariAppBundle::Front/layout.html.twig' %}
+
+
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="page-header">
+                <h1>Example page header
+                    <small>Subtext for header</small>
+                </h1>
+            </div>
+            <div class="col-md-8">
+
+                {% if etudiant %}
+                    <a class="btn btn-primary" href="{{ path('sari_edit_etudiant', {'id' : etudiant.id}) }}"> Editer son profil étudiant</a>
+                {% else %}
+                    <p>Vous n'avez pas de profil étudiant</p>
+                {% endif %}
+
+                {% if enseignant %}
+                    <a class="btn btn-primary" href="{{ path('sari_edit_enseignant', {'id' : enseignant.id}) }}"> Editer son profil enseignant</a>
+                {% else %}
+                    <p>Vous n'avez pas de profil enseignant</p>
+                {% endif %}
+
+
+
+                {% if professionnel %}
+                    <a class="btn btn-primary" href="{{ path('sari_edit_professionnel', {'id' : professionnel.id}) }}"> Editer son profil professionnel</a>
+                {% else %}
+                    <p>Vous n'avez pas de profil professionnel</p>
+                {% endif %}
+
+
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

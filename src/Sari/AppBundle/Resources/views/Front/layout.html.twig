@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<!-- Copyright © 2015-2016 Tous droits réservés à IUT de Lens - http://www.iut-lens.univ-artois.fr/ -->
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="Application suivi des étudiants">
+    <meta name="author" content="Alexandre PAVY, Alexandre SZYMKIW, Arnaud MORGAN">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    <title>{% block title %}Suivi des Étudiants - IUT de Lens{% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ asset('bundles/sariapp/lib/bootstrap-3.3.6/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/sariapp/lib/bootstrap-3.3.6/css/cosmo.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/sariapp/lib/font-awesome-4.5.0/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/sariapp/css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/sariapp/css/front.css') }}">
+
+    {% block style %}{% endblock %}
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<!-- No JavaScript Alert -->
+<noscript>
+    <div class="alert alert-danger text-center" style="margin: 0;border-radius: 0">
+        <span><strong>Attention: </strong> Pour accéder à toutes les fonctionnalités de notre site, veuillez s'il vous plaît activer JavaScript. Voici les
+            <a href="http://enable-javascript.com/fr/" class="alert-link" target="_blank">instructions pour activer
+                JavaScript dans votre navigateur Web</a>.
+        </span>
+    </div>
+</noscript>
+
+<header>
+    {% include 'SariAppBundle:Front/partials:navbar.html.twig' %}
+
+    {% include 'SariAppBundle:Modules:flashbag.html.twig' %}
+</header>
+
+<main>
+    {% block body %}{% endblock %}
+
+    {% if app.environment == 'dev' %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Développement panel</h3>
+                        </div>
+                        <div class="panel-body">
+                            <button onclick="testBootlint();" type="button" class="btn btn-danger">Bootlint</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function testBootlint() {
+                var s = document.createElement("script");
+                s.onload = function () {
+                    bootlint.showLintReportForCurrentDocument([]);
+                };
+                s.src = "https://maxcdn.bootstrapcdn.com/bootlint/latest/bootlint.min.js";
+                document.body.appendChild(s)
+            }
+        </script>
+    {% endif %}
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <hr>
+                <p>Copyright &copy; 2015-2016 Tous droits réservés à
+                    <a href="http://www.iut-lens.univ-artois.fr/">IUT de Lens</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="{{ asset('bundles/sariapp/lib/jquery/jquery-1.12.1.min.js') }}"></script>
+<script src="{{ asset('bundles/sariapp/lib/bootstrap-3.3.6/js/bootstrap.min.js') }}"></script>
+
+{% block script %}
+
+{% endblock %}
+</body>
+</html>

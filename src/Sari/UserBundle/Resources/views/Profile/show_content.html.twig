@@ -1,0 +1,133 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="page-header">
+            <h1>Votre Profil
+                <small>{{ app.user }}</small>
+            </h1>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ user.username }}</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-3 col-lg-3" align="center">
+                        <img src="{% if(app.user.personne is null) %}{{ asset('/upload/personne/photos/default-avatar.png') }}{% else %} {% if(app.user.personne.photoName is null) %} {{ asset('/upload/personne/photos/default-avatar.png') }} {% else %}{{ vich_uploader_asset(app.user.personne, 'photoFile') }}{% endif %}{% endif %}"
+                             class="img-circle img-responsive" alt="User Image">
+                    </div>
+
+                    <div class="col-md-9">
+                        <table class="table table-user-information">
+                            <tbody>
+                            <tr>
+                                <th>{{ 'profile.show.username'|trans }}:</th>
+                                <td>{{ user.username }}</td>
+                            </tr>
+                            <tr>
+                                <th>{{ 'profile.show.email'|trans }}</th>
+                                <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
+                            </tr>
+                            {% if(app.user.personne is not null) %}
+                            <tr>
+                                <th>Nom</th>
+                                <td>{{ user.personne.nom }}</td>
+                            </tr>
+                            <tr>
+                                <th>Prenom</th>
+                                <td>{{ user.personne.prenom }}</td>
+                            </tr>
+                            <tr>
+                                <th>Sexe</th>
+                                <td>{{ user.personne.sexe }}</td>
+                            </tr>
+                            <tr>
+                                <th>Date de naissance</th>
+                                <td>{% if user.personne.datenaissance %}{{ user.personne.datenaissance|date('Y-m-d') }}{% endif %}</td>
+                            </tr>
+                            <tr>
+                                <th>Adresse</th>
+                                <td>{{ user.personne.adrpersonnel.adr }}</td>
+                            </tr>
+                            <tr>
+                                <th>Complement</th>
+                                <td>{{ user.personne.adrpersonnel.complement }}</td>
+                            </tr>
+                            <tr>
+                                <th>Code Postale</th>
+                                <td>{{ user.personne.adrpersonnel.codepostal }}</td>
+                            </tr>
+                            <tr>
+                                <th>Ville</th>
+                                <td>{{ user.personne.adrpersonnel.ville }}</td>
+                            </tr>
+                            <tr>
+                                <th>Pays</th>
+                                <td>{{ user.personne.adrpersonnel.pays }}</td>
+                            </tr>
+                            <tr>
+                                <th>Téléphone Fixe</th>
+                                <td>{{ user.personne.adrpersonnel.telfixe }}</td>
+                            </tr>
+                            <tr>
+                                <th>Téléphone Portable</th>
+                                <td>{{ user.personne.adrpersonnel.telport }}</td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td>
+                                    <a class="btn btn-primary"
+                                       href="{{ path('sari_show_etudiant', {'id' : app.user.personne.id}) }}"> Voir
+                                        les infos étudiants</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td><a class="btn btn-primary"
+                                       href="{{ path('sari_show_professionnel', {'id' : app.user.personne.id}) }}">
+                                        Voir les infos professionnelles</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td>
+                                    <a class="btn btn-primary"
+                                       href="{{ path('sari_show_enseignant', {'id' : app.user.personne.id}) }}">
+                                        Voir les infos enseignants</a>
+                                </td>
+                            </tr>
+
+
+                            {% else %}
+
+                            <tr>
+                                <th></th>
+                                <td>
+                                    <a class="btn btn-primary" href="{{ path('fos_user_profile_edit') }}"> Mettre à jour
+                                        mes informations</a>
+                                </td>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <a href="{{ path('fos_user_profile_edit') }}" data-original-title="Edit this user"
+                   data-toggle="tooltip" type="button" class="btn btn-sm btn-warning">
+                    <i class="glyphicon glyphicon-edit"></i></a>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
